@@ -29,12 +29,12 @@ namespace Sleave.view
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvPersonnel = new System.Windows.Forms.DataGridView();
-            this.txtLastname = new System.Windows.Forms.TextBox();
+            this.txtLastName = new System.Windows.Forms.TextBox();
             this.txtMail = new System.Windows.Forms.TextBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.txtFirstName = new System.Windows.Forms.TextBox();
@@ -56,31 +56,31 @@ namespace Sleave.view
             this.dgvPersonnel.AllowUserToDeleteRows = false;
             this.dgvPersonnel.AllowUserToResizeColumns = false;
             this.dgvPersonnel.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvPersonnel.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvPersonnel.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvPersonnel.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvPersonnel.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPersonnel.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPersonnel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPersonnel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvPersonnel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPersonnel.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPersonnel.DefaultCellStyle = dataGridViewCellStyle11;
             this.dgvPersonnel.EnableHeadersVisualStyles = false;
             this.dgvPersonnel.GridColor = System.Drawing.SystemColors.WindowFrame;
             this.dgvPersonnel.Location = new System.Drawing.Point(13, 13);
@@ -88,26 +88,26 @@ namespace Sleave.view
             this.dgvPersonnel.Name = "dgvPersonnel";
             this.dgvPersonnel.ReadOnly = true;
             this.dgvPersonnel.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPersonnel.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPersonnel.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvPersonnel.RowHeadersVisible = false;
             this.dgvPersonnel.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvPersonnel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPersonnel.Size = new System.Drawing.Size(773, 221);
             this.dgvPersonnel.TabIndex = 1;
             // 
-            // txtLastname
+            // txtLastName
             // 
-            this.txtLastname.Location = new System.Drawing.Point(212, 272);
-            this.txtLastname.Name = "txtLastname";
-            this.txtLastname.Size = new System.Drawing.Size(175, 20);
-            this.txtLastname.TabIndex = 2;
+            this.txtLastName.Location = new System.Drawing.Point(212, 272);
+            this.txtLastName.Name = "txtLastName";
+            this.txtLastName.Size = new System.Drawing.Size(175, 20);
+            this.txtLastName.TabIndex = 2;
             // 
             // txtMail
             // 
@@ -190,6 +190,7 @@ namespace Sleave.view
             this.cboAction.Name = "cboAction";
             this.cboAction.Size = new System.Drawing.Size(175, 21);
             this.cboAction.TabIndex = 12;
+            this.cboAction.SelectedIndexChanged += new System.EventHandler(this.cboAction_SelectedIndexChanged);
             // 
             // btnValid
             // 
@@ -199,6 +200,7 @@ namespace Sleave.view
             this.btnValid.TabIndex = 13;
             this.btnValid.Text = "Valider";
             this.btnValid.UseVisualStyleBackColor = true;
+            this.btnValid.Click += new System.EventHandler(this.btnValid_Click);
             // 
             // btnCancel
             // 
@@ -208,6 +210,7 @@ namespace Sleave.view
             this.btnCancel.TabIndex = 14;
             this.btnCancel.Text = "Annuler";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // FrmPersonnel
             // 
@@ -226,7 +229,7 @@ namespace Sleave.view
             this.Controls.Add(this.txtFirstName);
             this.Controls.Add(this.txtPhone);
             this.Controls.Add(this.txtMail);
-            this.Controls.Add(this.txtLastname);
+            this.Controls.Add(this.txtLastName);
             this.Controls.Add(this.dgvPersonnel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -235,7 +238,6 @@ namespace Sleave.view
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestion du personnel";
-            this.Load += new System.EventHandler(this.FrmPersonnel_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonnel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -245,7 +247,7 @@ namespace Sleave.view
         #endregion
 
         private System.Windows.Forms.DataGridView dgvPersonnel;
-        private System.Windows.Forms.TextBox txtLastname;
+        private System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.TextBox txtMail;
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.TextBox txtFirstName;

@@ -66,5 +66,14 @@ namespace Sleave.control
         {
             return DataAccess.GetDepts();
         }
+
+        /// <summary>
+        /// Demande l'ajout d'un personnel à DataAccess
+        /// </summary>
+        /// <param name="pers"></param>
+        public void AddPersonnel(Personnel pers)
+        {
+            DataAccess.AddPersonnel(pers);
+        }
     }
 }

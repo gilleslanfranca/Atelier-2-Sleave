@@ -85,5 +85,23 @@ namespace Sleave.dal
             curs.Close();
             return depts;
         }
+
+        /// <summary>
+        /// Ajoute un personnel à base de données
+        /// </summary>
+        /// <param name="personnel"></param>
+        public static void AddPersonnel(Personnel personnel)
+        {
+            string req = "INSERT INTO personnel(nom, prenom, tel, mail, idservice) ";
+            req += "VALUES (@nom, @prenom, @tel, @mail, @idservice);";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@nom", personnel.GetLastName);
+            parameters.Add("@prenom", personnel.GetFirstName);
+            parameters.Add("@tel", personnel.GetPhone);
+            parameters.Add("@mail", personnel.GetMail);
+            parameters.Add("@idservice", personnel.GetIdDept);
+            ConnectionDataBase conn = ConnectionDataBase.GetInstance(connectionString);
+            conn.ReqNoQuery(req, parameters);
+        }
     }
 }
