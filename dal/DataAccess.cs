@@ -89,17 +89,47 @@ namespace Sleave.dal
         /// <summary>
         /// Ajoute un personnel à base de données
         /// </summary>
-        /// <param name="personnel"></param>
-        public static void AddPersonnel(Personnel personnel)
+        /// <param name="pers"></param>
+        public static void AddPersonnel(Personnel pers)
         {
             string req = "INSERT INTO personnel(nom, prenom, tel, mail, idservice) ";
             req += "VALUES (@nom, @prenom, @tel, @mail, @idservice);";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
-            parameters.Add("@nom", personnel.GetLastName);
-            parameters.Add("@prenom", personnel.GetFirstName);
-            parameters.Add("@tel", personnel.GetPhone);
-            parameters.Add("@mail", personnel.GetMail);
-            parameters.Add("@idservice", personnel.GetIdDept);
+            parameters.Add("@nom", pers.GetLastName);
+            parameters.Add("@prenom", pers.GetFirstName);
+            parameters.Add("@tel", pers.GetPhone);
+            parameters.Add("@mail", pers.GetMail);
+            parameters.Add("@idservice", pers.GetIdDept);
+            ConnectionDataBase conn = ConnectionDataBase.GetInstance(connectionString);
+            conn.ReqNoQuery(req, parameters);
+        }
+
+        /// <summary>
+        /// Efface le personnel de la base de données
+        /// </summary>
+        /// <param name="pers"></param>
+        public static void DeletePersonnel(Personnel pers)
+        {
+            string req = "DELETE FROM personnel ";
+            req += "WHERE idpersonnel = @idpersonnel;";
+
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", pers.GetIdPersonnel);
+            ConnectionDataBase conn = ConnectionDataBase.GetInstance(connectionString);
+            conn.ReqNoQuery(req, parameters);
+        }
+
+        /// <summary>
+        /// Efface toutes les absences d'un personnel de la base de données
+        /// </summary>
+        /// <param name="index"></param>
+        public static void DeleteAllAbsences(int index)
+        {
+            string req = "DELETE FROM absence ";
+            req += "WHERE idpersonnel = @idpersonnel;";
+
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", index);
             ConnectionDataBase conn = ConnectionDataBase.GetInstance(connectionString);
             conn.ReqNoQuery(req, parameters);
         }

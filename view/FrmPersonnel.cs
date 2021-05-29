@@ -65,6 +65,10 @@ namespace Sleave.view
                     break;
                 // Supprimer
                 case 1:
+                    if (CheckDGVIndex())
+                    {
+                        GetPersFields();
+                    }
                     break;
                 // Modifier
                 case 2:
@@ -113,9 +117,9 @@ namespace Sleave.view
                 case 0:
                     if (CheckPersFields())
                     {
-                        Dept dept = (Dept)bdgDepts.List[bdgDepts.Position];
-                        Personnel pers = new Personnel(0, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, dept.GetIdDept, dept.GetName);
-                        controller.AddPersonnel(pers);
+                        Dept deptAdd = (Dept)bdgDepts.List[bdgDepts.Position];
+                        Personnel persAdd = new Personnel(0, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, deptAdd.GetIdDept, deptAdd.GetName);
+                        controller.AddPersonnel(persAdd);
                         ResetForm();
                         BindDGVPersonnel();
                         bdgPersonnel.MoveLast();
@@ -123,6 +127,12 @@ namespace Sleave.view
                     break;
                 // Supprimer
                 case 1:
+                    Personnel persDel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
+                    controller.DeleteAllAbsences(persDel.GetIdPersonnel);
+                    controller.DeletePersonnel(persDel);
+                    ResetForm();
+                    BindDGVPersonnel();
+                    bdgPersonnel.MoveFirst();
                     break;
                 // Modifier
                 case 2:
@@ -232,6 +242,20 @@ namespace Sleave.view
         }
 
         /// <summary>
+        /// Récupère le personnel selectionné et affiche ses informations dans les champs
+        /// </summary>
+        private void GetPersFields()
+        {
+            Personnel pers = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
+            txtLastName.Text = pers.GetLastName;
+            txtFirstName.Text = pers.GetFirstName;
+            txtPhone.Text = pers.GetPhone;
+            txtMail.Text = pers.GetMail;
+            cboDept.Text = pers.GetDept;
+        }
+
+
+        /// <summary>
         /// Verifie que tous les champs sont remplis et que le service choisi existe
         /// </summary>
         /// <returns>Vrai ou Faux</returns>
@@ -249,6 +273,19 @@ namespace Sleave.view
             if (index < 0 || cboDept.SelectedIndex < 0)
             {
                 MessageBox.Show("Choisissez un service.");
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Verifie qu'un élément est présent dans la grillé
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckDGVIndex()
+        {
+            if (dgvPersonnel.RowCount < 0)
+            {
                 return false;
             }
             return true;
