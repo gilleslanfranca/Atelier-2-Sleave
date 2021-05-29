@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sleave.view;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace Sleave
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new FrmConnection());
         }
     }
 }
