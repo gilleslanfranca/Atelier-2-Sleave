@@ -51,7 +51,7 @@ namespace Sleave.view
             this.lblPwd.Location = new System.Drawing.Point(19, 57);
             this.lblPwd.Name = "lblPwd";
             this.lblPwd.Size = new System.Drawing.Size(71, 13);
-            this.lblPwd.TabIndex = 1;
+            this.lblPwd.TabIndex = 0;
             this.lblPwd.Text = "Mot de passe";
             // 
             // btnConnection
@@ -59,23 +59,24 @@ namespace Sleave.view
             this.btnConnection.Location = new System.Drawing.Point(95, 89);
             this.btnConnection.Name = "btnConnection";
             this.btnConnection.Size = new System.Drawing.Size(100, 25);
-            this.btnConnection.TabIndex = 2;
+            this.btnConnection.TabIndex = 3;
             this.btnConnection.Text = "se connecter";
             this.btnConnection.UseVisualStyleBackColor = true;
+            this.btnConnection.Click += new System.EventHandler(this.btnConnection_Click);
             // 
             // txtLogin
             // 
             this.txtLogin.Location = new System.Drawing.Point(95, 21);
             this.txtLogin.Name = "txtLogin";
             this.txtLogin.Size = new System.Drawing.Size(100, 20);
-            this.txtLogin.TabIndex = 3;
+            this.txtLogin.TabIndex = 1;
             // 
             // txtPwd
             // 
             this.txtPwd.Location = new System.Drawing.Point(95, 54);
             this.txtPwd.Name = "txtPwd";
             this.txtPwd.Size = new System.Drawing.Size(100, 20);
-            this.txtPwd.TabIndex = 4;
+            this.txtPwd.TabIndex = 2;
             // 
             // FrmConnection
             // 
