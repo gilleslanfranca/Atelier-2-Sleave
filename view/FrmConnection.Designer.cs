@@ -30,10 +30,10 @@ namespace Sleave.view
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.lblPwd = new System.Windows.Forms.Label();
+            this.btnConnection = new System.Windows.Forms.Button();
+            this.txtLogin = new System.Windows.Forms.TextBox();
+            this.txtPwd = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -45,47 +45,47 @@ namespace Sleave.view
             this.label1.TabIndex = 0;
             this.label1.Text = "Login";
             // 
-            // label2
+            // lblPwd
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 57);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Mot de passe";
+            this.lblPwd.AutoSize = true;
+            this.lblPwd.Location = new System.Drawing.Point(19, 57);
+            this.lblPwd.Name = "lblPwd";
+            this.lblPwd.Size = new System.Drawing.Size(71, 13);
+            this.lblPwd.TabIndex = 1;
+            this.lblPwd.Text = "Mot de passe";
             // 
-            // button1
+            // btnConnection
             // 
-            this.button1.Location = new System.Drawing.Point(95, 89);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 25);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "se connecter";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnConnection.Location = new System.Drawing.Point(95, 89);
+            this.btnConnection.Name = "btnConnection";
+            this.btnConnection.Size = new System.Drawing.Size(100, 25);
+            this.btnConnection.TabIndex = 2;
+            this.btnConnection.Text = "se connecter";
+            this.btnConnection.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // txtLogin
             // 
-            this.textBox1.Location = new System.Drawing.Point(95, 21);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 3;
+            this.txtLogin.Location = new System.Drawing.Point(95, 21);
+            this.txtLogin.Name = "txtLogin";
+            this.txtLogin.Size = new System.Drawing.Size(100, 20);
+            this.txtLogin.TabIndex = 3;
             // 
-            // textBox2
+            // txtPwd
             // 
-            this.textBox2.Location = new System.Drawing.Point(95, 54);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 4;
+            this.txtPwd.Location = new System.Drawing.Point(95, 54);
+            this.txtPwd.Name = "txtPwd";
+            this.txtPwd.Size = new System.Drawing.Size(100, 20);
+            this.txtPwd.TabIndex = 4;
             // 
             // FrmConnection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(236, 136);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtPwd);
+            this.Controls.Add(this.txtLogin);
+            this.Controls.Add(this.btnConnection);
+            this.Controls.Add(this.lblPwd);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -103,9 +103,9 @@ namespace Sleave.view
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label lblPwd;
+        private System.Windows.Forms.Button btnConnection;
+        private System.Windows.Forms.TextBox txtLogin;
+        private System.Windows.Forms.TextBox txtPwd;
     }
 }

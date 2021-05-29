@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Sleave.model
 {
+    /// <summary>
+    /// Classe métier des motifs
+    /// </summary>
     public class Reason
     {
         private int idReason;
