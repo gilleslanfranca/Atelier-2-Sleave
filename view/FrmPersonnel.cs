@@ -72,6 +72,11 @@ namespace Sleave.view
                     break;
                 // Modifier
                 case 2:
+                    if (CheckDGVIndex())
+                    {
+                        TogglePersFields();
+                        GetPersFields();
+                    }
                     break;
             }
         }
@@ -120,8 +125,6 @@ namespace Sleave.view
                         Dept deptAdd = (Dept)bdgDepts.List[bdgDepts.Position];
                         Personnel persAdd = new Personnel(0, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, deptAdd.GetIdDept, deptAdd.GetName);
                         controller.AddPersonnel(persAdd);
-                        ResetForm();
-                        BindDGVPersonnel();
                         bdgPersonnel.MoveLast();
                     }
                     break;
@@ -131,15 +134,25 @@ namespace Sleave.view
                     if (ConfirmChange(persDel, "Supprimer le personnel n° ", "Supprimer")){
                         controller.DeleteAllAbsences(persDel.GetIdPersonnel);
                         controller.DeletePersonnel(persDel);
-                        ResetForm();
-                        BindDGVPersonnel();
                         bdgPersonnel.MoveFirst();
                     }
                     break;
                 // Modifier
                 case 2:
+                    if (CheckPersFields())
+                    {
+                        Personnel persMod = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
+                        if (ConfirmChange(persMod, "Modifier le personnel n° ", "Modifier"))
+                        {
+                            Dept deptUp = (Dept)bdgDepts.List[bdgDepts.Position];
+                            Personnel persUp = new Personnel(persMod.GetIdPersonnel, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, deptUp.GetIdDept, deptUp.GetName);
+                            controller.UpdatePersonnel(persUp);
+                        }
+                    }
                     break;
             }
+            ResetForm();
+            BindDGVPersonnel();
         }
 
         /// <summary>
@@ -304,7 +317,7 @@ namespace Sleave.view
         /// <param name="pers"></param>
         /// <param name="message"></param>
         /// <param name="title"></param>
-        /// <returns></returns>
+        /// <returns>Vrai ou Faux</returns>
         private bool ConfirmChange(Personnel pers, string message, string title)
         {
             if (MessageBox.Show(message + pers.GetIdPersonnel + " : " + pers.GetFirstName + " " + pers.GetLastName + " ?", title, MessageBoxButtons.YesNo) == DialogResult.Yes)

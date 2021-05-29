@@ -86,6 +86,15 @@ namespace Sleave.control
         }
 
         /// <summary>
+        /// Demande la modification d'un personnel à DataAccess
+        /// </summary>
+        /// <param name="persUp"></param>
+        public void UpdatePersonnel(Personnel persUp)
+        {
+            DataAccess.UpdatePersonnel(persUp);
+        }
+
+        /// <summary>
         /// Demande l'effacement de toutes les absences d'un personnel à DataAccess
         /// </summary>
         /// <param name="index"></param>
