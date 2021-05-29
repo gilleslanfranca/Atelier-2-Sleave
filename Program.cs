@@ -18,6 +18,7 @@ namespace Sleave
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FrmConnection());
+            Application.Run(new FrmPersonnel());
         }
     }
 }
