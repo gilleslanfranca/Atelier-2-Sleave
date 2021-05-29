@@ -32,7 +32,6 @@ namespace Sleave.view
         /// </summary>
         BindingSource bdgDepts = new BindingSource();
 
-
         /// <summary>
         /// Initialise les éléments de l'interface du personnel
         /// </summary>
@@ -46,6 +45,89 @@ namespace Sleave.view
             DrawDGVPersonnel();
             TogglePersFields();
             ToggleButtons();
+        }
+
+        /// <summary>
+        /// Recherche l'action demandé après selection
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cboAction_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ToggleSelection();
+            ToggleButtons();
+            switch (cboAction.SelectedIndex)
+            {
+                // Ajouter 
+                case 0:
+                    TogglePersFields();
+                    cboDept.Text = "Choissisez un service";
+                    break;
+                // Supprimer
+                case 1:
+                    break;
+                // Modifier
+                case 2:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Annule l'action et reinitialise l'interface
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            ResetForm();
+        }
+
+        /// <summary>
+        /// Reinitialise l'interface
+        /// </summary>
+        private void ResetForm()
+        {
+            ToggleSelection();
+            ToggleButtons();
+            EmptyPersFields();
+            txtLastName.Enabled = false;
+            txtFirstName.Enabled = false;
+            txtPhone.Enabled = false;
+            txtMail.Enabled = false;
+            cboDept.Enabled = false;
+            cboDept.SelectedIndex = -1;
+            cboDept.Text = "";
+            cboAction.Text = "Gérer le personnel";
+        }
+
+        /// <summary>
+        /// Verifie et valide l'action demandée 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnValid_Click(object sender, EventArgs e)
+        {
+            switch (cboAction.SelectedIndex)
+            {
+                // Ajouter 
+                case 0:
+                    if (CheckPersFields())
+                    {
+                        Dept dept = (Dept)bdgDepts.List[bdgDepts.Position];
+                        Personnel pers = new Personnel(0, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, dept.GetIdDept, dept.GetName);
+                        controller.AddPersonnel(pers);
+                        ResetForm();
+                        BindDGVPersonnel();
+                        bdgPersonnel.MoveLast();
+                    }
+                    break;
+                // Supprimer
+                case 1:
+                    break;
+                // Modifier
+                case 2:
+                    break;
+            }
         }
 
         /// <summary>
@@ -114,22 +196,62 @@ namespace Sleave.view
         /// </summary>
         private void TogglePersFields()
         {
-            txtLastname.Enabled = !txtLastname.Enabled;
+            txtLastName.Enabled = !txtLastName.Enabled;
             txtFirstName.Enabled = !txtFirstName.Enabled;
             txtPhone.Enabled = !txtPhone.Enabled;
             txtMail.Enabled = !txtMail.Enabled;
             cboDept.Enabled = !cboDept.Enabled;
         }
 
+        /// <summary>
+        /// Active ou désactive les boutons
+        /// </summary>
         private void ToggleButtons()
         {
             btnCancel.Enabled = !btnCancel.Enabled;
             btnValid.Enabled = !btnValid.Enabled;
         }
 
-        private void FrmPersonnel_Load(object sender, EventArgs e)
+        private void ToggleSelection()
         {
+            dgvPersonnel.Enabled = !dgvPersonnel.Enabled;
+            cboAction.Enabled = !cboAction.Enabled;
+        }
 
+        /// <summary>
+        /// Vide les champs d'information/ de saisie du personnel
+        /// </summary>
+        private void EmptyPersFields()
+        {
+            txtLastName.Text = "";
+            txtFirstName.Text = "";
+            txtPhone.Text = "";
+            txtMail.Text = "";
+            cboDept.SelectedIndex = -1;
+            cboDept.Text = "";
+        }
+
+        /// <summary>
+        /// Verifie que tous les champs sont remplis et que le service choisi existe
+        /// </summary>
+        /// <returns>Vrai ou Faux</returns>
+        private bool CheckPersFields()
+        {
+            if (txtLastName.Text.Equals("") || txtFirstName.Text.Equals("") || txtPhone.Text.Equals("") || txtMail.Text.Equals("") || cboDept.Text.Equals(""))
+            {
+                MessageBox.Show("Tous les champs sont obligatoires.");
+                return false;
+            }
+            string value = cboDept.Text;
+            cboDept.Text = "";
+            int index = cboDept.FindString(value);
+            cboDept.Text = value;
+            if (index < 0 || cboDept.SelectedIndex < 0)
+            {
+                MessageBox.Show("Choisissez un service.");
+                return false;
+            }
+            return true;
         }
     }
 }
