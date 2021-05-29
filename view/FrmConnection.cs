@@ -10,8 +10,14 @@ using System.Windows.Forms;
 
 namespace Sleave.view
 {
+    /// <summary>
+    /// Interface graphique de la connexion
+    /// </summary>
     public partial class FrmConnection : Form
     {
+        /// <summary>
+        /// Initialise les éléments de l'interface de connexion
+        /// </summary>
         public FrmConnection()
         {
             InitializeComponent();

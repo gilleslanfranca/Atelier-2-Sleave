@@ -10,8 +10,14 @@ using System.Windows.Forms;
 
 namespace Sleave.view
 {
+    /// <summary>
+    /// /// Interface graphique pour la gestion du personnel
+    /// </summary>
     public partial class FrmPersonnel : Form
     {
+        /// <summary>
+        /// Initialise les éléments de l'interface du personnel
+        /// </summary>
         public FrmPersonnel()
         {
             InitializeComponent();
