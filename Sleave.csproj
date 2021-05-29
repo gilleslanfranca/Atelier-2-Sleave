@@ -63,6 +63,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>mediatek86DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="model\Absence.cs" />
+    <Compile Include="model\Dept.cs" />
+    <Compile Include="model\Personnel.cs" />
+    <Compile Include="model\Reason.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="view\FrmAbsences.cs">
@@ -127,8 +131,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="control\" />
-    <Folder Include="model\" />
-    <Folder Include="pics\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
