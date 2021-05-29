@@ -19,6 +19,7 @@ namespace Sleave
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FrmConnection());
             Application.Run(new FrmPersonnel());
+            Application.Run(new FrmAbsences());
         }
     }
 }
