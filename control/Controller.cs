@@ -1,4 +1,5 @@
 ﻿using Sleave.dal;
+using Sleave.model;
 using Sleave.view;
 using System;
 using System.Collections.Generic;
@@ -25,12 +26,10 @@ namespace Sleave.control
         {
             frmConnection = new FrmConnection(this);
             frmConnection.ShowDialog();
-
         }
 
         /// <summary>
-        /// Demande une connextion avec les données saisies
-        /// Ouverture de l'interface Gestion du Personnel si correct
+        /// Demande de connexion avec les données saisies. Ouvre l'interface "Gestion du Personnel" si correct
         /// </summary>
         /// <param name="login"></param>
         /// <param name="pwd"></param>
@@ -48,6 +47,24 @@ namespace Sleave.control
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Demande et retourne la liste des personnels à DataAccess
+        /// </summary>
+        /// <returns>Liste des personnels</returns>
+        public List<Personnel> GetPersonnel()
+        {
+            return DataAccess.GetPersonnel();
+        }
+
+        /// <summary>
+        /// Demande et retourne la liste des services à DataAccess
+        /// </summary>
+        /// <returns>Liste des services</returns>
+        public List<Dept> GetDepts()
+        {
+            return DataAccess.GetDepts();
         }
     }
 }
