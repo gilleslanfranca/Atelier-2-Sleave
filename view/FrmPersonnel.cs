@@ -128,11 +128,13 @@ namespace Sleave.view
                 // Supprimer
                 case 1:
                     Personnel persDel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
-                    controller.DeleteAllAbsences(persDel.GetIdPersonnel);
-                    controller.DeletePersonnel(persDel);
-                    ResetForm();
-                    BindDGVPersonnel();
-                    bdgPersonnel.MoveFirst();
+                    if (ConfirmChange(persDel, "Supprimer le personnel n° ", "Supprimer")){
+                        controller.DeleteAllAbsences(persDel.GetIdPersonnel);
+                        controller.DeletePersonnel(persDel);
+                        ResetForm();
+                        BindDGVPersonnel();
+                        bdgPersonnel.MoveFirst();
+                    }
                     break;
                 // Modifier
                 case 2:
@@ -286,9 +288,32 @@ namespace Sleave.view
         {
             if (dgvPersonnel.RowCount < 0)
             {
+                MessageBox.Show("Aucun personnel n'est selectionné.");
+                ToggleSelection();
+                ToggleButtons();
+                cboAction.SelectedIndex = -1;
+                cboAction.Text = "Gérer le personnel";
                 return false;
             }
             return true;
+        }
+
+        /// <summary>
+        /// Demande la confirmation de pousuivre l'action 
+        /// </summary>
+        /// <param name="pers"></param>
+        /// <param name="message"></param>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        private bool ConfirmChange(Personnel pers, string message, string title)
+        {
+            if (MessageBox.Show(message + pers.GetIdPersonnel + " : " + pers.GetFirstName + " " + pers.GetLastName + " ?", title, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                return true;
+            }
+            return false;
+
+
         }
     }
 }
