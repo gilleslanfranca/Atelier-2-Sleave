@@ -75,5 +75,23 @@ namespace Sleave.control
         {
             DataAccess.AddPersonnel(pers);
         }
+
+        /// <summary>
+        /// Demande l'effacement d'un personnel à DataAccess
+        /// </summary>
+        /// <param name="pers"></param>
+        public void DeletePersonnel(Personnel pers)
+        {
+            DataAccess.DeletePersonnel(pers);
+        }
+
+        /// <summary>
+        /// Demande l'effacement de toutes les absences d'un personnel à DataAccess
+        /// </summary>
+        /// <param name="index"></param>
+        public void DeleteAllAbsences(int index)
+        {
+            DataAccess.DeleteAllAbsences(index);
+        }
     }
 }
