@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="connection\ConnectionDataBase.cs" />
+    <Compile Include="control\Controller.cs" />
     <Compile Include="dal\DataAccess.cs" />
     <Compile Include="mediatek86DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -145,9 +146,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="control\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
