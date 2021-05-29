@@ -120,6 +120,25 @@ namespace Sleave.dal
         }
 
         /// <summary>
+        /// Modifie le personnel dans la base de données
+        /// </summary>
+        /// <param name="persUp"></param>
+        public static void UpdatePersonnel(Personnel persUp)
+        {
+            string req = "UPDATE personnel SET idservice = @idservice, nom = @nom, prenom = @prenom, tel = @tel, mail = @mail ";
+            req += "where idpersonnel = @idpersonnel;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", persUp.GetIdPersonnel);
+            parameters.Add("@nom", persUp.GetLastName);
+            parameters.Add("@prenom", persUp.GetFirstName);
+            parameters.Add("@tel", persUp.GetPhone);
+            parameters.Add("@mail", persUp.GetMail);
+            parameters.Add("@idservice", persUp.GetIdDept);
+            ConnectionDataBase conn = ConnectionDataBase.GetInstance(connectionString);
+            conn.ReqNoQuery(req, parameters);
+        }
+
+        /// <summary>
         /// Efface toutes les absences d'un personnel de la base de données
         /// </summary>
         /// <param name="index"></param>
