@@ -50,7 +50,16 @@ namespace Sleave.control
         }
 
         /// <summary>
-        /// Ferme l'interface et ouvre l'interface "Gestion des absences"
+        /// Ouvre l'interface "Gestion du personnel"
+        /// </summary>
+        /// <param name="frmPersonnel"></param>
+        public void OpenFrmPersonnel(FrmPersonnel frmPersonnel)
+        {
+            frmPersonnel.Show();
+        }
+
+        /// <summary>
+        /// Ferme l'interface de gestion du personnel et ouvre l'interface "Gestion des absences"
         /// </summary>
         /// <param name="frmPersonnel"></param>
         /// <param name="persAbsence"></param>
@@ -60,16 +69,6 @@ namespace Sleave.control
             FrmAbsences formAbsence = new FrmAbsences(this, persAbsence, frmPersonnel);
             formAbsence.ShowDialog();
         }
-
-        /// <summary>
-        /// Ouvre l'interface "Gestion du personnel"
-        /// </summary>
-        /// <param name="frmPersonnel"></param>
-        public void OpenFrmPersonnel(FrmPersonnel frmPersonnel)
-        {
-            frmPersonnel.Show();
-        }
-
 
         /// <summary>
         /// Demande et retourne la liste des personnels à DataAccess
@@ -90,10 +89,10 @@ namespace Sleave.control
         }
 
         /// <summary>
-        /// Demande et retourne la liste d'absence d'un personnel à DataAccess
+        /// Demande et retourne la liste d'absences d'un personnel à DataAccess
         /// </summary>
         /// <param name="pers"></param>
-        /// <returns></returns>
+        /// <returns>LIste des absences</returns>
         public List<Absence> GetAbsences(Personnel pers)
         {
             return DataAccess.GetAbsences(pers);
@@ -102,7 +101,7 @@ namespace Sleave.control
         /// <summary>
         /// Demande et retourne la liste des motifs à DataAccess
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Liste des motifs</returns>
         public List<Reason> GetReasons()
         {
             return DataAccess.GetReasons();

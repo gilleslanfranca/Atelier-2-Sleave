@@ -11,7 +11,14 @@ namespace Sleave.model
     /// </summary>
     public class Dept
     {
+        /// <summary>
+        /// Identifiant du service
+        /// </summary>
         private int idDept;
+
+        /// <summary>
+        /// Nom du service
+        /// </summary>
         private string name;
 
         /// <summary>

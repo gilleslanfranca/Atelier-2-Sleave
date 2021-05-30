@@ -11,7 +11,14 @@ namespace Sleave.model
     /// </summary>
     public class Reason
     {
+        /// <summary>
+        /// Identifiant du motif
+        /// </summary>
         private int idReason;
+
+        /// <summary>
+        /// Libellé du motif
+        /// </summary>
         private string name;
 
         /// <summary>

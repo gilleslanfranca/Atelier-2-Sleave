@@ -7,6 +7,9 @@ using System.Windows.Forms;
 
 namespace Sleave
 {
+    /// <summary>
+    /// Classe d'entrée du programme
+    /// </summary>
     static class Program
     {
         /// <summary>
