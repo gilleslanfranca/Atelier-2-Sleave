@@ -69,6 +69,7 @@ namespace Sleave.view
             this.btnValid.TabIndex = 26;
             this.btnValid.Text = "Valider";
             this.btnValid.UseVisualStyleBackColor = true;
+            this.btnValid.Click += new System.EventHandler(this.BtnValid_Click);
             // 
             // cboAction
             // 

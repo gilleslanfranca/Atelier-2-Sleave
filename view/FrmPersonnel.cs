@@ -52,7 +52,7 @@ namespace Sleave.view
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cboAction_SelectedIndexChanged(object sender, EventArgs e)
+        private void CboAction_SelectedIndexChanged(object sender, EventArgs e)
         {
             ToggleSelection();
             ToggleButtons();
@@ -92,7 +92,7 @@ namespace Sleave.view
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             ResetForm();
         }
@@ -120,7 +120,7 @@ namespace Sleave.view
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnValid_Click(object sender, EventArgs e)
+        private void BtnValid_Click(object sender, EventArgs e)
         {
             switch (cboAction.SelectedIndex)
             {
@@ -221,8 +221,8 @@ namespace Sleave.view
             dgvPersonnel.Columns["GetDept"].Width = 150;
             if (dgvPersonnel.RowCount < 10)
             {
-                dgvPersonnel.Width = dgvPersonnel.Width - 17;
-                Width = Width - 17;
+                dgvPersonnel.Width -= 17;
+                Width -= 17;
             }
         }
 
