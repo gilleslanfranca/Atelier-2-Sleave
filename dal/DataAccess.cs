@@ -52,7 +52,7 @@ namespace Sleave.dal
             string req = "SELECT p.idpersonnel AS idPersonnel, s.idservice AS idDept, s.nom AS dept, p.nom AS lastName, p.prenom AS firstName, p.tel AS phone, p.mail AS mail ";
             req += "FROM personnel p ";
             req += "JOIN service AS s ON (p.idservice = s.idservice) ";
-            req += "ORDER BY p.idpersonnel ";
+            req += "ORDER BY p.idpersonnel;";
             ConnectionDataBase curs = ConnectionDataBase.GetInstance(connectionString);
             curs.ReqSelect(req, null);
             while (curs.Read())
@@ -74,7 +74,7 @@ namespace Sleave.dal
             string req = "SELECT idservice AS idDept, nom AS dept ";
             req += "FROM service ";
             req += "WHERE 1 ";
-            req += "ORDER BY dept ";
+            req += "ORDER BY dept;";
             ConnectionDataBase curs = ConnectionDataBase.GetInstance(connectionString);
             curs.ReqSelect(req, null);
             while (curs.Read())
@@ -99,7 +99,7 @@ namespace Sleave.dal
             req += "JOIN personnel AS p ON p.idpersonnel = a.idpersonnel ";
             req += "JOIN motif AS m ON a.idmotif = m.idmotif ";
             req += "WHERE a.idpersonnel = @idpersonnel ";
-            req += "ORDER BY dateStart DESC";
+            req += "ORDER BY dateStart DESC;";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@idpersonnel", pers.GetIdPersonnel);
             ConnectionDataBase curs = ConnectionDataBase.GetInstance(connectionString);
@@ -123,7 +123,7 @@ namespace Sleave.dal
             string req = "SELECT idmotif AS idReason, libelle AS reason ";
             req += "FROM motif ";
             req += "WHERE 1 ";
-            req += "ORDER BY reason ";
+            req += "ORDER BY reason;";
             ConnectionDataBase curs = ConnectionDataBase.GetInstance(connectionString);
             curs.ReqSelect(req, null);
             while (curs.Read())
@@ -204,6 +204,19 @@ namespace Sleave.dal
             conn.ReqNoQuery(req, parameters);
         }
 
+        /// <summary>
+        /// Efface l'absence d'un personnel de la base de données
+        /// </summary>
+        /// <param name="absenceDel"></param>
+        public static void DelAbsence(Absence absenceDel)
+        {
+            string req = "DELETE FROM absence ";
+            req += "WHERE DATE(dateDebut) = @dateStart;";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@dateStart", absenceDel.GetDateStart.Date.ToString("yyyy-MM-dd"));
+            ConnectionDataBase conn = ConnectionDataBase.GetInstance(connectionString);
+            conn.ReqNoQuery(req, parameters);
+        }
 
         /// <summary>
         /// Efface toutes les absences d'un personnel de la base de données
@@ -213,7 +226,6 @@ namespace Sleave.dal
         {
             string req = "DELETE FROM absence ";
             req += "WHERE idpersonnel = @idpersonnel;";
-
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@idpersonnel", index);
             ConnectionDataBase conn = ConnectionDataBase.GetInstance(connectionString);

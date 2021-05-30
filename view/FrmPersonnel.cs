@@ -146,7 +146,7 @@ namespace Sleave.view
                 // Supprimer
                 case 1:
                     Personnel persDel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
-                    if (ConfirmChange(persDel, "Supprimer le personnel n° ", "Supprimer")){
+                    if (ConfirmChange("Supprimer le personnel n° " + persDel.GetIdPersonnel + " : " + persDel.GetFirstName + " " + persDel.GetLastName + " ?", "Supprimer")){
                         controller.DeleteAllAbsences(persDel.GetIdPersonnel);
                         controller.DeletePersonnel(persDel);
                     }
@@ -156,7 +156,7 @@ namespace Sleave.view
                     if (CheckPersFields())
                     {
                         Personnel persMod = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
-                        if (ConfirmChange(persMod, "Modifier le personnel n° ", "Modifier"))
+                        if (ConfirmChange("Modifier le personnel n° " + persMod.GetIdPersonnel + " : " + persMod.GetFirstName + " " + persMod.GetLastName + " ?", "Modifier"))
                         {
                             Dept deptUp = (Dept)bdgDepts.List[bdgDepts.Position];
                             Personnel persUp = new Personnel(persMod.GetIdPersonnel, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, deptUp.GetIdDept, deptUp.GetName);
@@ -343,13 +343,12 @@ namespace Sleave.view
         /// <summary>
         /// Demande la confirmation de pousuivre l'action 
         /// </summary>
-        /// <param name="pers"></param>
         /// <param name="message"></param>
         /// <param name="title"></param>
         /// <returns>Vrai ou Faux</returns>
-        private bool ConfirmChange(Personnel pers, string message, string title)
+        private bool ConfirmChange(string message, string title)
         {
-            if (MessageBox.Show(message + pers.GetIdPersonnel + " : " + pers.GetFirstName + " " + pers.GetLastName + " ?", title, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show(message, title, MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 return true;
             }
