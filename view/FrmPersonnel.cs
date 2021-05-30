@@ -326,7 +326,7 @@ namespace Sleave.view
         /// <summary>
         /// Verifie qu'un élément est présent dans la grille de données des personnels
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Vrai ou Faux</returns>
         private bool CheckDGVIndex()
         {
             if (dgvPersonnel.RowCount < 0)
