@@ -70,6 +70,7 @@ namespace Sleave.control
             frmPersonnel.Show();
         }
 
+
         /// <summary>
         /// Demande et retourne la liste des personnels à DataAccess
         /// </summary>
@@ -86,6 +87,25 @@ namespace Sleave.control
         public List<Dept> GetDepts()
         {
             return DataAccess.GetDepts();
+        }
+
+        /// <summary>
+        /// Demande et retourne la liste d'absence d'un personnel à DataAccess
+        /// </summary>
+        /// <param name="pers"></param>
+        /// <returns></returns>
+        public List<Absence> GetAbsences(Personnel pers)
+        {
+            return DataAccess.GetAbsences(pers);
+        }
+
+        /// <summary>
+        /// Demande et retourne la liste des motifs à DataAccess
+        /// </summary>
+        /// <returns></returns>
+        public List<Reason> GetReasons()
+        {
+            return DataAccess.GetReasons();
         }
 
         /// <summary>
