@@ -18,14 +18,19 @@ namespace Sleave.view
     public partial class FrmAbsences : Form
     {
         /// <summary>
-        /// Constante d'unité de largeur des champs de la grille de données
+        /// Constante : Unité de largeur des champs de la grille de données
         /// </summary>
         private const int fieldWidthUnit = 25;
 
         /// <summary>
-        /// Constante du nombre de ligne affichée sans barre déroulante
+        /// Constante : Nombre maximal de ligne affichée sans barre déroulante
         /// </summary>
         private const int maxRows = 12;
+
+        /// <summary>
+        /// Constante : Chaine nom de la liste d'actions déroulante
+        /// </summary>
+        private const string actionText = "Gérer les absences";
 
         /// <summary>
         /// Instance de controle
@@ -74,53 +79,42 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Recherche l'action demandée après selection
+        /// Recherche l'action demandée et prépare l'interface
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void CboAction_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ToggleSelection();
-            ToggleButtons();
-
-            switch (cboAction.SelectedIndex)
+            // Ajouter
+            if (cboAction.SelectedIndex == 0)
             {
-                // Ajouter 
-                case 0:
-                    HideDtpProtection();
-                    cboReason.Enabled = true;
-                    cboReason.Text = "Choissisez un motif";
-                    break;
-                // Supprimer
-                case 1:
-                    if (CheckDGVIndex())
-                    {
-                        Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
-                        txtDateStart.Text = absence.GetDateStart.ToString("dd.MM.yyyy");
-                        txtDateEnd.Text = absence.GetDateEnd.ToString("dd.MM.yyyy");
-                        cboReason.Text = absence.GetReason;
-                    }
-                    break;
-                // Modifier
-                case 2:
-                    if (CheckDGVIndex())
-                    {
-                        HideDtpProtection();
-                        Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
-                        dtpStart.Value = absence.GetDateStart;
-                        dtpEnd.Value = absence.GetDateEnd;
-                        cboReason.Enabled = true;
-                        cboReason.Text = absence.GetReason;
-                    }   
-                    break;
-                // Afficher texte
-                default:
-                    cboAction.Text = "Gérer les absences";
-                    break;
+                EnableFields();
+                dtpStart.Value = DateTime.Today;
+                dtpEnd.Value = DateTime.Today;
+                cboReason.Text = "Choissisez un motif";
+            }
+            // Supprimer
+            if (cboAction.SelectedIndex == 1 && CheckDGVIndex())
+            {
+                Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
+                txtDateStart.Text = absence.GetDateStart.ToString("dd.MM.yyyy");
+                txtDateEnd.Text = absence.GetDateEnd.ToString("dd.MM.yyyy");
+                cboReason.Text = absence.GetReason;
+            }
+            if (cboAction.SelectedIndex == 2 && CheckDGVIndex())
+            {
+                EnableFields();
+                cboReason.Enabled = true;
+                Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
+                dtpStart.Value = absence.GetDateStart;
+                dtpEnd.Value = absence.GetDateEnd;
+                cboReason.Text = absence.GetReason;
+            }
+            if(cboAction.SelectedIndex == -1)
+            {
+                cboAction.Text = actionText;
             }
         }
-
-        
 
         /// <summary>
         /// Verifie et valide l'action demandée 
@@ -129,68 +123,80 @@ namespace Sleave.view
         /// <param name="e"></param>
         private void BtnValid_Click(object sender, EventArgs e)
         {
-            switch (cboAction.SelectedIndex)
+            if(cboAction.SelectedIndex == 1)
             {
-                // Ajouter 
-                case 0:
-                    Reason reasonAdd = (Reason)bdgReasons.List[bdgReasons.Position];
-                    Absence absenceAdd = new Absence(pers.GetIdPersonnel, pers.GetLastName, pers.GetFirstName, dtpStart.Value.Date, dtpStart.Value.Date, reasonAdd.GetIdReason, reasonAdd.GetName);
-
-                    if (CheckReason() && CheckDatesOfAbsence(absenceAdd))
+                if (ConfirmChange("Supprimer l'absence du " + txtDateStart.Text + " au " + txtDateStart.Text + " ?", "Supprimer"))
+                {
+                    Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
+                    controller.DelAbsence(absence);
+                    ResetForm();
+                    bdgAbsences.MoveFirst();
+                }
+            }
+            else
+            {
+                Reason reason = (Reason)bdgReasons.List[bdgReasons.Position];
+                Absence absence = new Absence(pers.GetIdPersonnel, pers.GetLastName, pers.GetFirstName, dtpStart.Value.Date, dtpStart.Value.Date, reason.GetIdReason, reason.GetName);
+                if (CheckReason() && CheckDatesOfAbsence(absence))
+                {
+                    // Ajouter
+                    if (cboAction.SelectedIndex == 0)
                     {
-                        controller.AddAbsence(absenceAdd);
+                        controller.AddAbsence(absence);
+                        ResetForm();
+                        bdgAbsences.MoveLast();
                     }
-                    break;
-                // Supprimer
-                case 1:
-                    if (ConfirmChange("Supprimer l'absence du " + txtDateStart.Text + " au " + txtDateStart.Text + " ?", "Supprimer"))
+                    // Modifier
+                    if (cboAction.SelectedIndex == 0)
                     {
-                        Absence absenceDel = (Absence)bdgAbsences.List[bdgAbsences.Position];
-                        controller.DelAbsence(absenceDel);
-                    }
-                    break;
-                // Modifier
-                case 2:
-                    Absence absenceMod = (Absence)bdgAbsences.List[bdgAbsences.Position];
-                    if (CheckReason() && CheckDatesOfAbsence(absenceMod))
-                    { 
-                        if (ConfirmChange("Modifier l'absence du " + absenceMod.GetDateStart.ToString("dd.MM.yyyyy") + " au " + absenceMod.GetDateEnd.ToString("dd.MM.yyyyy") + " ?", "Modifier"))
+                        if (ConfirmChange("Modifier l'absence du " + absence.GetDateStart.ToString("dd.MM.yyyyy") + " au " + absence.GetDateEnd.ToString("dd.MM.yyyyy") + " ?", "Modifier"))
                         {
-                            controller.DelAbsence(absenceMod);
-                            Reason reasonUp = (Reason)bdgReasons.List[bdgReasons.Position];
-                            Absence absenceUp = new Absence(pers.GetIdPersonnel, pers.GetLastName, pers.GetFirstName, dtpStart.Value.Date, dtpStart.Value.Date, reasonUp.GetIdReason, reasonUp.GetName);
-                            controller.AddAbsence(absenceUp);
+                            Absence absenceDel = (Absence)bdgAbsences.List[bdgAbsences.Position];
+                            controller.DelAbsence(absenceDel);
+                            controller.AddAbsence(absence);
+                            ResetForm();
                         }
                     }
-
-                    break;
-                case 3:
-                    break;
+                }
             }
-            BindDGVAbsences();
+        }
+
+        /// <summary>
+        /// Annule l'action et reinitialise l'interface
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
             ResetForm();
         }
 
         /// <summary>
-        /// Vide les champs de protection des dates de l'absence
+        /// Ferme l'interface et ouvre l'interface "Gestion du personnel"
         /// </summary>
-        private void EmptyDtpProtection()
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmAbsences_FormClosing(Object sender, FormClosingEventArgs e)
         {
-            txtDateStart.Text = "";
-            txtDateEnd.Text = "";
+            controller.OpenFrmPersonnel(frmPersonnel);
         }
 
+        /// <summary>
+        /// Réinitialise l'interface
+        /// </summary>
         private void ResetForm()
         {
             ToggleSelection();
             ToggleButtons();
+            BindDGVAbsences();
             ShowDtpProtection();
-            EmptyDtpProtection();
+            txtDateStart.Text = "";
+            txtDateEnd.Text = "";
             cboReason.Enabled = false;
+            cboReason.SelectedIndex = -1;
             cboReason.Text = "";
-            cboAction.Text = "Gérer les absences";
+            cboAction.Text = actionText;
         }
-
         /// <summary>
         /// Redessine la grille de données des absences
         /// </summary>
@@ -206,26 +212,6 @@ namespace Sleave.view
             dgvAbsences.Columns["GetDateStart"].Width = fieldWidthUnit * 4;
             dgvAbsences.Columns["GetDateEnd"].Width = fieldWidthUnit * 4;
             dgvAbsences.Columns["GetReason"].Width = fieldWidthUnit * 6;
-        }
-
-        /// <summary>
-        /// Ferme l'interface et ouvre l'interface "Gestion du personnel"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FrmAbsences_FormClosing(Object sender, FormClosingEventArgs e)
-        {
-            controller.OpenFrmPersonnel(frmPersonnel);
-        }
-
-        /// <summary>
-        /// Annule l'action et reinitialise l'interface
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BtnCancel_Click(object sender, EventArgs e)
-        {
-            ResetForm();
         }
 
         /// <summary>
@@ -261,7 +247,7 @@ namespace Sleave.view
             List<Reason> reasons = controller.GetReasons();
             bdgReasons.DataSource = reasons;
             cboReason.DataSource = bdgReasons;
-            cboReason.SelectedItem = -1;
+            cboReason.SelectedIndex = -1;
             cboReason.Text = "";
         }
 
@@ -271,10 +257,20 @@ namespace Sleave.view
         private void BindActions()
         {
             cboAction.Items.Clear();
-            cboAction.Text = "Gérer les absences";
+            cboAction.Text = actionText;
             cboAction.Items.Add("Ajouter");
             cboAction.Items.Add("Supprimer");
             cboAction.Items.Add("Modifier");
+        }
+
+        /// <summary>
+        /// Active les champs d'informations/ de saisie
+        /// </summary>
+        private void EnableFields()
+        {
+            ToggleSelection();
+            ToggleButtons();
+            HideDtpProtection();
         }
 
         /// <summary>
@@ -293,37 +289,6 @@ namespace Sleave.view
         {
             txtDateStart.Visible = true;
             txtDateEnd.Visible = true;
-        }
-
-
-        /// <summary>
-        /// Active les champs d'information/ de saisie de l'absence
-        /// </summary>
-        private void EnableAbsFields()
-        {
-            cboReason.Enabled = true;
-        }
-
-
-        /// <summary>
-        /// Désactive les champs d'information/ de saisie de l'absence
-        /// </summary>
-        private void DisableAbsFields()
-        {
-            //dtpStart.Enabled = false;
-            //dtpEnd.Enabled = false;
-            cboReason.Enabled = false;
-            cboReason.Text = "";
-
-        }
-
-        /// <summary>
-        /// Désactive les dates d'absences
-        /// </summary>
-        private void DisableDateFields()
-        {
-            dtpStart.Enabled = false;
-            dtpEnd.Enabled = false;
         }
 
         /// <summary>
@@ -350,9 +315,9 @@ namespace Sleave.view
         /// <returns>Vrai ou Faux</returns>
         private bool CheckReason()
         {
-            if (cboReason.Text.Equals("") || cboReason.Text.Equals(""))
+            if (cboReason.Text.Equals(""))
             {
-                MessageBox.Show("Tous les champs sont obligatoires.");
+                MessageBox.Show("Tous les champs sont obligatoires.", "Saisie", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             string value = cboReason.Text;
@@ -361,14 +326,14 @@ namespace Sleave.view
             cboReason.Text = value;
             if (index < 0 || cboReason.SelectedIndex < 0)
             {
-                MessageBox.Show("Choisissez un motif existant.");
+                MessageBox.Show("Choisissez un motif existant.", "Motif", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             return true;
         }
 
         /// <summary>
-        /// 
+        /// Verifie les dates de l'absence
         /// </summary>
         /// <returns></returns>
         private bool CheckDatesOfAbsence(Absence absence)
@@ -380,18 +345,18 @@ namespace Sleave.view
                     //La date de début ou de fin trouve déja dans une absence
                     if (dtpStart.Value.Date >= abs.GetDateStart.Date && dtpStart.Value.Date <= abs.GetDateEnd.Date)
                     {
-                        MessageBox.Show("La date de debut se trouve dans une période d'absence.");
+                        MessageBox.Show("La date de debut se trouve dans une période d'absence.", "Dates", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }
                     if (dtpEnd.Value.Date >= abs.GetDateStart.Date && dtpEnd.Value.Date <= abs.GetDateEnd.Date)
                     {
-                        MessageBox.Show("La date de fin se trouve dans une période d'absence.");
+                        MessageBox.Show("La date de fin se trouve dans une période d'absence.", "Dates", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }
                     //La date de début se trouve avant et la date de fin après une absence
                     if (dtpStart.Value.Date < abs.GetDateStart.Date && dtpEnd.Value.Date > abs.GetDateEnd.Date)
                     {
-                        MessageBox.Show("Une absence se trouve déjà dans cette periode d'absence");
+                        MessageBox.Show("Une absence se trouve déjà dans cette periode d'absence", "Dates", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }
                 }
@@ -407,7 +372,7 @@ namespace Sleave.view
         /// <returns>Vrai ou Faux</returns>
         private bool ConfirmChange(string message, string title)
         {
-            if (MessageBox.Show(message, title, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 return true;
             }
@@ -415,18 +380,15 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Verifie qu'un élément est présent dans la grille de données des absences
+        /// Réinitialise le texte de liste d'action et informe l'utlisateur si aucun élément de la grille de données n'est selectionné
         /// </summary>
         /// <returns>Vrai ou Faux</returns>
         private bool CheckDGVIndex()
         {
-            MessageBox.Show(dgvAbsences.RowCount.ToString());
             if (dgvAbsences.RowCount < 1)
             {
-                MessageBox.Show("Aucun personnel n'est selectionné.");
-                ToggleSelection();
-                ToggleButtons();
-                cboAction.Text = "Gérer les absences";
+                MessageBox.Show("Aucune absence n'est selectionnés.", "Absence", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboAction.SelectedIndex = -1;
                 return false;
             }
             return true;   

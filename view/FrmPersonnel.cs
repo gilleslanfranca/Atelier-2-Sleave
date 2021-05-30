@@ -65,6 +65,7 @@ namespace Sleave.view
         /// <param name="e"></param>
         private void CboAction_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Rien 
             if(cboAction.SelectedIndex == -1)
             {
                 cboAction.Text = "Gérer le personnel";
@@ -177,6 +178,7 @@ namespace Sleave.view
             List<Dept> depts = controller.GetDepts();
             bdgDepts.DataSource = depts;
             cboDept.DataSource = bdgDepts;
+            cboDept.SelectedIndex = -1;
             cboDept.Text = "";
         }
 
@@ -326,8 +328,6 @@ namespace Sleave.view
             if (dgvPersonnel.RowCount < 1)
             {
                 MessageBox.Show("Aucun personnel n'est selectionné.", "Personnel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ToggleSelection();
-                ToggleButtons();
                 cboAction.SelectedIndex = -1;
                 return false;
             }
