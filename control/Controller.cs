@@ -126,6 +126,15 @@ namespace Sleave.control
         }
 
         /// <summary>
+        /// Demande la modification d'un personnel à DataAccess
+        /// </summary>
+        /// <param name="persUp"></param>
+        public void UpdatePersonnel(Personnel persUp)
+        {
+            DataAccess.UpdatePersonnel(persUp);
+        }
+
+        /// <summary>
         /// Demande l'ajout d'une absence à DataAccess
         /// </summary>
         /// <param name="absence"></param>
@@ -134,13 +143,9 @@ namespace Sleave.control
             DataAccess.AddAbsence(absence);
         }
 
-        /// <summary>
-        /// Demande la modification d'un personnel à DataAccess
-        /// </summary>
-        /// <param name="persUp"></param>
-        public void UpdatePersonnel(Personnel persUp)
+        internal void DelAbsence(Absence absenceDel)
         {
-            DataAccess.UpdatePersonnel(persUp);
+            DataAccess.DelAbsence(absenceDel);
         }
 
         /// <summary>

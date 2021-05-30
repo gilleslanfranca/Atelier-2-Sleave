@@ -82,25 +82,35 @@ namespace Sleave.view
         {
             ToggleSelection();
             ToggleButtons();
-            HideDtpProtection();
 
             switch (cboAction.SelectedIndex)
             {
                 // Ajouter 
                 case 0:
+                    HideDtpProtection();
                     cboReason.Enabled = true;
                     cboReason.Text = "Choissisez un motif";
                     break;
                 // Supprimer
                 case 1:
+                    if (bdgAbsences.Count > 0)
+                    {
+                        Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
+                        txtDateStart.Text = absence.GetDateStart.ToString("dd.MM.yyyy");
+                        txtDateEnd.Text = absence.GetDateEnd.ToString("dd.MM.yyyy");
+                        cboReason.Text = absence.GetReason;
+                    }
                     break;
                 // Modifier
                 case 2:
                     break;
-                case 3:
+                default:
+                    cboAction.Text = "Gérer les absences";
                     break;
             }
         }
+
+        
 
         /// <summary>
         /// Verifie et valide l'action demandée 
@@ -113,19 +123,28 @@ namespace Sleave.view
             {
                 // Ajouter 
                 case 0:
-                    Reason reason = (Reason)bdgReasons.List[bdgReasons.Position];
-                    Absence absence = new Absence(pers.GetIdPersonnel, pers.GetLastName, pers.GetFirstName, dtpStart.Value.Date, dtpStart.Value.Date, reason.GetIdReason, reason.GetName);
+                    Reason reasonAdd = (Reason)bdgReasons.List[bdgReasons.Position];
+                    Absence absenceAdd = new Absence(pers.GetIdPersonnel, pers.GetLastName, pers.GetFirstName, dtpStart.Value.Date, dtpStart.Value.Date, reasonAdd.GetIdReason, reasonAdd.GetName);
 
-                    if (CheckReason() && CheckDatesOfAbsence(absence))
+                    if (CheckReason() && CheckDatesOfAbsence(absenceAdd))
                     {
-                        controller.AddAbsence(absence);
+                        controller.AddAbsence(absenceAdd);
                     }
                     break;
                 // Supprimer
                 case 1:
+                    if (bdgAbsences.Count > 0)
+                    {
+                        if (ConfirmChange("Supprimer l'absence du " + txtDateStart.Text + " au " + txtDateStart.Text + " ?", "Supprimer"))
+                        {
+                            Absence absenceDel = (Absence)bdgAbsences.List[bdgAbsences.Position];
+                            controller.DelAbsence(absenceDel);
+                        }
+                    }   
                     break;
                 // Modifier
                 case 2:
+                    
                     break;
                 case 3:
                     break;
@@ -134,11 +153,21 @@ namespace Sleave.view
             ResetForm();
         }
 
+        /// <summary>
+        /// Vide les champs de protection des dates de l'absence
+        /// </summary>
+        private void EmptyDtpProtection()
+        {
+            txtDateStart.Text = "";
+            txtDateEnd.Text = "";
+        }
+
         private void ResetForm()
         {
             ToggleSelection();
             ToggleButtons();
             ShowDtpProtection();
+            EmptyDtpProtection();
             cboReason.Enabled = false;
             cboReason.Text = "";
             cboAction.Text = "Gérer les absences";
@@ -214,6 +243,7 @@ namespace Sleave.view
             List<Reason> reasons = controller.GetReasons();
             bdgReasons.DataSource = reasons;
             cboReason.DataSource = bdgReasons;
+            cboReason.SelectedItem = -1;
             cboReason.Text = "";
         }
 
@@ -343,6 +373,21 @@ namespace Sleave.view
                 }
             }
             return true;
+        }
+
+        /// <summary>
+        /// Demande la confirmation de pousuivre l'action 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="title"></param>
+        /// <returns>Vrai ou Faux</returns>
+        private bool ConfirmChange(string message, string title)
+        {
+            if (MessageBox.Show(message, title, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
