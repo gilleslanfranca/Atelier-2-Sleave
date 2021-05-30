@@ -78,6 +78,12 @@ namespace Sleave.view
                         GetPersFields();
                     }
                     break;
+                case 3:
+                    if (CheckDGVIndex())
+                    {
+                        GetPersFields();
+                    }
+                    break;
             }
         }
 
@@ -149,6 +155,10 @@ namespace Sleave.view
                             controller.UpdatePersonnel(persUp);
                         }
                     }
+                    break;
+                case 3:
+                    Personnel personnelAbs = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
+                    controller.OpenFrmAbsence(this, personnelAbs);
                     break;
             }
             ResetForm();

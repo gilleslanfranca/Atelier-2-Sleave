@@ -50,6 +50,27 @@ namespace Sleave.control
         }
 
         /// <summary>
+        /// Ferme l'interface et ouvre l'interface "Gestion des absences"
+        /// </summary>
+        /// <param name="frmPersonnel"></param>
+        /// <param name="persAbsence"></param>
+        public void OpenFrmAbsence(FrmPersonnel frmPersonnel, Personnel persAbsence)
+        {
+            frmPersonnel.Hide();
+            FrmAbsences formAbsence = new FrmAbsences(this, persAbsence, frmPersonnel);
+            formAbsence.ShowDialog();
+        }
+
+        /// <summary>
+        /// Ouvre l'interface "Gestion du personnel"
+        /// </summary>
+        /// <param name="frmPersonnel"></param>
+        public void OpenFrmPersonnel(FrmPersonnel frmPersonnel)
+        {
+            frmPersonnel.Show();
+        }
+
+        /// <summary>
         /// Demande et retourne la liste des personnels à DataAccess
         /// </summary>
         /// <returns>Liste des personnels</returns>
