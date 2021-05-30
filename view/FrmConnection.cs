@@ -36,7 +36,7 @@ namespace Sleave.view
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnConnection_Click(object sender, EventArgs e)
+        private void BtnConnection_Click(object sender, EventArgs e)
         {
             if (!txtLogin.Text.Equals("") && !txtPwd.Text.Equals(""))
             {

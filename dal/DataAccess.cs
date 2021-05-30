@@ -72,7 +72,7 @@ namespace Sleave.dal
         {
             List<Dept> depts = new List<Dept>();
             string req = "SELECT idservice AS idDept, nom AS dept ";
-            req += "FROM `service` ";
+            req += "FROM service ";
             req += "WHERE 1 ";
             req += "ORDER BY dept ";
             ConnectionDataBase curs = ConnectionDataBase.GetInstance(connectionString);
@@ -99,7 +99,7 @@ namespace Sleave.dal
             req += "JOIN personnel AS p ON p.idpersonnel = a.idpersonnel ";
             req += "JOIN motif AS m ON a.idmotif = m.idmotif ";
             req += "WHERE a.idpersonnel = @idpersonnel ";
-            req += "ORDER BY dateStart desc";
+            req += "ORDER BY dateStart DESC";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@idpersonnel", pers.GetIdPersonnel);
             ConnectionDataBase curs = ConnectionDataBase.GetInstance(connectionString);
@@ -120,7 +120,7 @@ namespace Sleave.dal
         public static List<Reason> GetReasons()
         {
             List<Reason> reasons = new List<Reason>();
-            string req = "SELECT idmotif AS idReason, libelle AS reason";
+            string req = "SELECT idmotif AS idReason, libelle AS reason ";
             req += "FROM motif ";
             req += "WHERE 1 ";
             req += "ORDER BY reason ";
@@ -186,6 +186,24 @@ namespace Sleave.dal
             ConnectionDataBase conn = ConnectionDataBase.GetInstance(connectionString);
             conn.ReqNoQuery(req, parameters);
         }
+
+        /// <summary>
+        /// Ajoute une absence à une personnel de la base de données
+        /// </summary>
+        /// <param name="absence"></param>
+        public static void AddAbsence(Absence absence)
+        {
+            string req = "INSERT INTO absence(dateDebut, dateFin,idpersonnel, idmotif) ";
+            req += "VALUES (@dateStart, @datEnd, @idPersonnel, @idReason);";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@dateStart", absence.GetDateStart.Date.ToString("yyyy-MM-dd"));
+            parameters.Add("@datEnd", absence.GetDateEnd.Date.ToString("yyyy-MM-dd"));
+            parameters.Add("@idPersonnel", absence.GetIdpersonnel);
+            parameters.Add("@idReason", absence.GetIdReason);
+            ConnectionDataBase conn = ConnectionDataBase.GetInstance(connectionString);
+            conn.ReqNoQuery(req, parameters);
+        }
+
 
         /// <summary>
         /// Efface toutes les absences d'un personnel de la base de données

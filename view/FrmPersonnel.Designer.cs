@@ -238,7 +238,6 @@ namespace Sleave.view
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestion du personnel";
-            this.Load += new System.EventHandler(this.FrmPersonnel_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonnel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

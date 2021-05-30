@@ -24,12 +24,12 @@ namespace Sleave.model
         /// <summary>
         /// Getter sur l'identifiant du motif 
         /// </summary>
-        public int GetIdmotif { get => idReason; }
+        public int GetIdReason { get => idReason; }
 
         /// <summary>
         /// Getter sur le libellé du motif
         /// </summary>
-        public string GetLibelle { get => name; }
+        public string GetName { get => name; }
 
         /// <summary>
         /// Constructeur du motif: valorise les propriétés

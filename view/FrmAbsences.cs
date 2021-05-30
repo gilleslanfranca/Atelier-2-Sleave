@@ -63,8 +63,9 @@ namespace Sleave.view
             InitializeComponent();
             txtLastname.Text = pers.GetLastName;
             txtFirstName.Text = pers.GetFirstName;
+            ShowDtpProtection();
             ToggleButtons();
-            DisableAbsFields();
+            cboReason.Enabled = false;
             BindDGVAbsences();
             BindDGVReasons();
             BindActions();
@@ -73,18 +74,74 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Ferme l'interface et ouvre l'interface "Gestion du personnel"
+        /// Recherche l'action demandée après selection
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FrmAbsences_FormClosing(Object sender, FormClosingEventArgs e)
+        private void CboAction_SelectedIndexChanged(object sender, EventArgs e)
         {
-            controller.OpenFrmPersonnel(frmPersonnel);
+            ToggleSelection();
+            ToggleButtons();
+            HideDtpProtection();
+
+            switch (cboAction.SelectedIndex)
+            {
+                // Ajouter 
+                case 0:
+                    cboReason.Enabled = true;
+                    cboReason.Text = "Choissisez un motif";
+                    break;
+                // Supprimer
+                case 1:
+                    break;
+                // Modifier
+                case 2:
+                    break;
+                case 3:
+                    break;
+            }
         }
 
+        /// <summary>
+        /// Verifie et valide l'action demandée 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnValid_Click(object sender, EventArgs e)
         {
+            switch (cboAction.SelectedIndex)
+            {
+                // Ajouter 
+                case 0:
+                    Reason reason = (Reason)bdgReasons.List[bdgReasons.Position];
+                    Absence absence = new Absence(pers.GetIdPersonnel, pers.GetLastName, pers.GetFirstName, dtpStart.Value.Date, dtpStart.Value.Date, reason.GetIdReason, reason.GetName);
 
+                    if (CheckReason() && CheckDatesOfAbsence(absence))
+                    {
+                        controller.AddAbsence(absence);
+                    }
+                    break;
+                // Supprimer
+                case 1:
+                    break;
+                // Modifier
+                case 2:
+                    break;
+                case 3:
+                    break;
+            }
+            BindDGVAbsences();
+            ResetForm();
+        }
+
+        private void ResetForm()
+        {
+            ToggleSelection();
+            ToggleButtons();
+            ShowDtpProtection();
+            cboReason.Enabled = false;
+            cboReason.Text = "";
+            cboAction.Text = "Gérer les absences";
         }
 
         /// <summary>
@@ -102,6 +159,26 @@ namespace Sleave.view
             dgvAbsences.Columns["GetDateStart"].Width = fieldWidthUnit * 4;
             dgvAbsences.Columns["GetDateEnd"].Width = fieldWidthUnit * 4;
             dgvAbsences.Columns["GetReason"].Width = fieldWidthUnit * 6;
+        }
+
+        /// <summary>
+        /// Ferme l'interface et ouvre l'interface "Gestion du personnel"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmAbsences_FormClosing(Object sender, FormClosingEventArgs e)
+        {
+            controller.OpenFrmPersonnel(frmPersonnel);
+        }
+
+        /// <summary>
+        /// Annule l'action et reinitialise l'interface
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            ResetForm();
         }
 
         /// <summary>
@@ -137,7 +214,6 @@ namespace Sleave.view
             List<Reason> reasons = controller.GetReasons();
             bdgReasons.DataSource = reasons;
             cboReason.DataSource = bdgReasons;
-            cboReason.SelectedIndex = -1;
             cboReason.Text = "";
         }
 
@@ -147,20 +223,30 @@ namespace Sleave.view
         private void BindActions()
         {
             cboAction.Items.Clear();
-            cboAction.Text = "Gérer les personnels";
+            cboAction.Text = "Gérer les absences";
             cboAction.Items.Add("Ajouter");
             cboAction.Items.Add("Supprimer");
             cboAction.Items.Add("Modifier");
-            cboAction.Items.Add("Afficher les absences");
         }
+
+        private void HideDtpProtection()
+        {
+            txtDateStart.Visible = false;
+            txtDateEnd.Visible = false;
+        }
+
+        private void ShowDtpProtection()
+        {
+            txtDateStart.Visible = true;
+            txtDateEnd.Visible = true;
+        }
+
 
         /// <summary>
         /// Active les champs d'information/ de saisie de l'absence
         /// </summary>
         private void EnableAbsFields()
         {
-            dtpStart.Enabled = true;
-            dtpEnd.Enabled = true;
             cboReason.Enabled = true;
         }
 
@@ -170,9 +256,11 @@ namespace Sleave.view
         /// </summary>
         private void DisableAbsFields()
         {
-            dtpStart.Enabled = false;
-            dtpEnd.Enabled = false;
+            //dtpStart.Enabled = false;
+            //dtpEnd.Enabled = false;
             cboReason.Enabled = false;
+            cboReason.Text = "";
+
         }
 
         /// <summary>
@@ -202,15 +290,59 @@ namespace Sleave.view
             btnValid.Enabled = !btnValid.Enabled;
         }
 
+        /// <summary>
+        /// Verifie que tous le champ motif est rempli et que le motif choisi existe
+        /// </summary>
+        /// <returns>Vrai ou Faux</returns>
+        private bool CheckReason()
+        {
+            if (cboReason.Text.Equals("") || cboReason.Text.Equals(""))
+            {
+                MessageBox.Show("Tous les champs sont obligatoires.");
+                return false;
+            }
+            string value = cboReason.Text;
+            cboReason.Text = "";
+            int index = cboReason.FindString(value);
+            cboReason.Text = value;
+            if (index < 0 || cboReason.SelectedIndex < 0)
+            {
+                MessageBox.Show("Choisissez un motif existant.");
+                return false;
+            }
+            return true;
+        }
 
         /// <summary>
-        /// Recherche l'action demandé après selection
+        /// 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void cboAction_SelectedIndexChanged(object sender, EventArgs e)
+        /// <returns></returns>
+        private bool CheckDatesOfAbsence(Absence absence)
         {
-
+            foreach (Absence abs in bdgAbsences)
+            {
+                if (abs == absence)
+                {
+                    //La date de début ou de fin trouve déja dans une absence
+                    if (dtpStart.Value.Date >= abs.GetDateStart.Date && dtpStart.Value.Date <= abs.GetDateEnd.Date)
+                    {
+                        MessageBox.Show("La date de debut se trouve dans une période d'absence.");
+                        return false;
+                    }
+                    if (dtpEnd.Value.Date >= abs.GetDateStart.Date && dtpEnd.Value.Date <= abs.GetDateEnd.Date)
+                    {
+                        MessageBox.Show("La date de fin se trouve dans une période d'absence.");
+                        return false;
+                    }
+                    //La date de début se trouve avant et la date de fin après une absence
+                    if (dtpStart.Value.Date < abs.GetDateStart.Date && dtpEnd.Value.Date > abs.GetDateEnd.Date)
+                    {
+                        MessageBox.Show("Une absence se trouve déjà dans cette periode d'absence");
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     }
 }
