@@ -190,7 +190,7 @@ namespace Sleave.view
             this.cboAction.Name = "cboAction";
             this.cboAction.Size = new System.Drawing.Size(175, 21);
             this.cboAction.TabIndex = 12;
-            this.cboAction.SelectedIndexChanged += new System.EventHandler(this.cboAction_SelectedIndexChanged);
+            this.cboAction.SelectedIndexChanged += new System.EventHandler(this.CboAction_SelectedIndexChanged);
             // 
             // btnValid
             // 
@@ -200,7 +200,7 @@ namespace Sleave.view
             this.btnValid.TabIndex = 13;
             this.btnValid.Text = "Valider";
             this.btnValid.UseVisualStyleBackColor = true;
-            this.btnValid.Click += new System.EventHandler(this.btnValid_Click);
+            this.btnValid.Click += new System.EventHandler(this.BtnValid_Click);
             // 
             // btnCancel
             // 
@@ -210,7 +210,7 @@ namespace Sleave.view
             this.btnCancel.TabIndex = 14;
             this.btnCancel.Text = "Annuler";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // FrmPersonnel
             // 

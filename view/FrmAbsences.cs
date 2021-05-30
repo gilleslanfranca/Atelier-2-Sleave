@@ -64,6 +64,9 @@ namespace Sleave.view
             controller.OpenFrmPersonnel(frmPersonnel);
         }
 
+        private void BtnValid_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
