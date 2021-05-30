@@ -42,7 +42,7 @@ namespace Sleave.model
         /// <summary>
         /// Getter sur la date de fin de l'absence
         /// </summary>
-        public DateTime GetDateEnd { get => dateEnd; }
+        public DateTime GetDateEnd { get => dateEnd.Date; }
 
         /// <summary>
         /// Getter sur l'identifiant du motif de l'absence
@@ -61,10 +61,10 @@ namespace Sleave.model
         /// <param name="lastName"></param>
         /// <param name="firstName"></param>
         /// <param name="dateStart"></param>
-        /// <param name="dateFin"></param>
+        /// <param name="dateEnd"></param>
         /// <param name="idReason"></param>
         /// <param name="reason"></param>
-        public Absence(int idPersonnel, string lastName, string firstName, DateTime dateStart, DateTime dateFin, int idReason, string reason)
+        public Absence(int idPersonnel, string lastName, string firstName, DateTime dateStart, DateTime dateEnd, int idReason, string reason)
         {
             this.idPersonnel = idPersonnel;
             this.lastName = lastName;

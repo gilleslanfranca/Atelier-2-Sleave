@@ -18,6 +18,16 @@ namespace Sleave.view
     public partial class FrmPersonnel : Form
     {
         /// <summary>
+        /// Constante d'unité de largeur des champs de la grille de données
+        /// </summary>
+        private const int fieldWidthUnit = 25;
+
+        /// <summary>
+        /// Constante du nombre de ligne affichée sans barre déroulante
+        /// </summary>
+        private const int maxRows = 9;
+
+        /// <summary>
         /// Instance de controle
         /// </summary>
         Controller controller;
@@ -43,6 +53,7 @@ namespace Sleave.view
             BindDGVDepts();
             BindActions();
             DrawDGVPersonnel();
+            ResizeDGVPersonnel();
             TogglePersFields();
             ToggleButtons();
         }
@@ -131,7 +142,6 @@ namespace Sleave.view
                         Dept deptAdd = (Dept)bdgDepts.List[bdgDepts.Position];
                         Personnel persAdd = new Personnel(0, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, deptAdd.GetIdDept, deptAdd.GetName);
                         controller.AddPersonnel(persAdd);
-                        bdgPersonnel.MoveLast();
                     }
                     break;
                 // Supprimer
@@ -140,7 +150,6 @@ namespace Sleave.view
                     if (ConfirmChange(persDel, "Supprimer le personnel n° ", "Supprimer")){
                         controller.DeleteAllAbsences(persDel.GetIdPersonnel);
                         controller.DeletePersonnel(persDel);
-                        bdgPersonnel.MoveFirst();
                     }
                     break;
                 // Modifier
@@ -163,6 +172,8 @@ namespace Sleave.view
             }
             ResetForm();
             BindDGVPersonnel();
+            ResizeDGVPersonnel();
+            bdgPersonnel.MoveFirst();
         }
 
         /// <summary>
@@ -213,16 +224,26 @@ namespace Sleave.view
             dgvPersonnel.Columns["GetIdDept"].Visible = false;
             dgvPersonnel.Columns["GetDept"].HeaderText = "Service";
             dgvPersonnel.Columns["GetDept"].DisplayIndex = 1;
-            dgvPersonnel.Columns["GetIdPersonnel"].Width = 50;
-            dgvPersonnel.Columns["GetLastName"].Width = 125;
-            dgvPersonnel.Columns["GetFirstName"].Width = 125;
-            dgvPersonnel.Columns["GetPhone"].Width = 125;
-            dgvPersonnel.Columns["GetMail"].Width = 175;
-            dgvPersonnel.Columns["GetDept"].Width = 150;
-            if (dgvPersonnel.RowCount < 10)
+            dgvPersonnel.Columns["GetDept"].Width = fieldWidthUnit * 5;
+            dgvPersonnel.Columns["GetIdPersonnel"].Width = fieldWidthUnit * 2;
+            dgvPersonnel.Columns["GetLastName"].Width = fieldWidthUnit * 5;
+            dgvPersonnel.Columns["GetFirstName"].Width = fieldWidthUnit * 5;
+            dgvPersonnel.Columns["GetPhone"].Width = fieldWidthUnit * 5;
+            dgvPersonnel.Columns["GetMail"].Width = fieldWidthUnit * 7;
+        }
+
+        /// <summary>
+        /// Defini la taille du champs Adresse Email selon le nombre de ligne dans la grille de données
+        /// </summary>
+        private void ResizeDGVPersonnel() {
+            if (dgvPersonnel.RowCount > maxRows)
             {
-                dgvPersonnel.Width -= 17;
-                Width -= 17;
+                dgvPersonnel.Columns["GetMail"].Width = fieldWidthUnit *7;
+            }
+            else
+            {
+
+                dgvPersonnel.Columns["GetMail"].Width = fieldWidthUnit * 8;
             }
         }
 
@@ -247,6 +268,9 @@ namespace Sleave.view
             btnValid.Enabled = !btnValid.Enabled;
         }
 
+        /// <summary>
+        /// Active ou désactive les champs de sélection
+        /// </summary>
         private void ToggleSelection()
         {
             dgvPersonnel.Enabled = !dgvPersonnel.Enabled;
@@ -336,6 +360,11 @@ namespace Sleave.view
             }
             return false;
 
+
+        }
+
+        private void FrmPersonnel_Load(object sender, EventArgs e)
+        {
 
         }
     }

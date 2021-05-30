@@ -87,6 +87,55 @@ namespace Sleave.dal
         }
 
         /// <summary>
+        /// Récupère et retourne les absences de la base de données
+        /// </summary>
+        /// <param name="pers"></param>
+        /// <returns>Liste des absences</returns>
+        public static List<Absence> GetAbsences(Personnel pers)
+        {
+            List<Absence> absences = new List<Absence>();
+            string req = "SELECT a.idpersonnel AS idPersonnel, p.nom AS lastName, p.prenom AS firstName, a.DateDebut AS dateStart, a.dateFin AS dateEnd, m.idmotif AS idReason, m.libelle AS reason ";
+            req += "FROM absence AS a ";
+            req += "JOIN personnel AS p ON p.idpersonnel = a.idpersonnel ";
+            req += "JOIN motif AS m ON a.idmotif = m.idmotif ";
+            req += "WHERE a.idpersonnel = @idpersonnel ";
+            req += "ORDER BY dateStart desc";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@idpersonnel", pers.GetIdPersonnel);
+            ConnectionDataBase curs = ConnectionDataBase.GetInstance(connectionString);
+            curs.ReqSelect(req, parameters);
+            while (curs.Read())
+            {
+                Absence absence = new Absence((int)curs.Field("idpersonnel"), (string)curs.Field("lastName"), (string)curs.Field("firstName"), (DateTime)curs.Field("dateStart"), (DateTime)curs.Field("dateEnd"), (int)curs.Field("idReason"), (string)curs.Field("reason"));
+                absences.Add(absence);
+            }
+            curs.Close();
+            return absences;
+        }
+
+        /// <summary>
+        /// Récupère et retourne les motifs de la base de données
+        /// </summary>
+        /// <returns>Liste de motifs</returns>
+        public static List<Reason> GetReasons()
+        {
+            List<Reason> reasons = new List<Reason>();
+            string req = "SELECT idmotif AS idReason, libelle AS reason";
+            req += "FROM motif ";
+            req += "WHERE 1 ";
+            req += "ORDER BY reason ";
+            ConnectionDataBase curs = ConnectionDataBase.GetInstance(connectionString);
+            curs.ReqSelect(req, null);
+            while (curs.Read())
+            {
+                Reason reason = new Reason((int)curs.Field("idReason"), (string)curs.Field("reason"));
+                reasons.Add(reason);
+            }
+            curs.Close();
+            return reasons;
+        }
+
+        /// <summary>
         /// Ajoute un personnel à base de données
         /// </summary>
         /// <param name="pers"></param>
