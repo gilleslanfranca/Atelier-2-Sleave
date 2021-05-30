@@ -420,7 +420,8 @@ namespace Sleave.view
         /// <returns>Vrai ou Faux</returns>
         private bool CheckDGVIndex()
         {
-            if (dgvAbsences.RowCount < 0)
+            MessageBox.Show(dgvAbsences.RowCount.ToString());
+            if (dgvAbsences.RowCount < 1)
             {
                 MessageBox.Show("Aucun personnel n'est selectionné.");
                 ToggleSelection();

@@ -13,17 +13,17 @@ using System.Windows.Forms;
 namespace Sleave.view
 {
     /// <summary>
-    /// /// Interface graphique pour la gestion du personnel
+    /// Interface graphique pour la gestion du personnel
     /// </summary>
     public partial class FrmPersonnel : Form
     {
         /// <summary>
-        /// Constante d'unité de largeur des champs de la grille de données
+        /// Constante : Unité de largeur des champs de la grille de données
         /// </summary>
         private const int fieldWidthUnit = 25;
 
         /// <summary>
-        /// Constante du nombre de ligne affichée sans barre déroulante
+        /// Constante : Nombre maximal de ligne affichée sans barre déroulante
         /// </summary>
         private const int maxRows = 9;
 
@@ -59,70 +59,42 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Recherche l'action demandée après selection
+        /// Recherche l'action demandée et prépare l'interface
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void CboAction_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ToggleSelection();
-            ToggleButtons();
-            switch (cboAction.SelectedIndex)
+            if(cboAction.SelectedIndex == -1)
             {
-                // Ajouter 
-                case 0:
-                    TogglePersFields();
-                    cboDept.Text = "Choissisez un service";
-                    break;
-                // Supprimer
-                case 1:
-                    if (CheckDGVIndex())
+                cboAction.Text = "Gérer le personnel";
+            }
+            else
+            {
+                if (CheckDGVIndex())
+                {
+                    ToggleSelection();
+                    ToggleButtons();
+                    // Ajouter
+                    if (cboAction.SelectedIndex == 0)
+                    {
+                        TogglePersFields();
+                        cboDept.Text = "Choissisez un service";
+                    }
+                    // Supprimer || Afficher
+                    if (cboAction.SelectedIndex == 1 || cboAction.SelectedIndex == 3)
                     {
                         GetPersFields();
                     }
-                    break;
-                // Modifier
-                case 2:
-                    if (CheckDGVIndex())
+                    // Modifier
+                    if (cboAction.SelectedIndex == 2)
                     {
                         TogglePersFields();
                         GetPersFields();
                     }
-                    break;
-                case 3:
-                    if (CheckDGVIndex())
-                    {
-                        GetPersFields();
-                    }
-                    break;
+                }
+                
             }
-        }
-
-        /// <summary>
-        /// Annule l'action et reinitialise l'interface
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BtnCancel_Click(object sender, EventArgs e)
-        {
-            ResetForm();
-        }
-
-        /// <summary>
-        /// Reinitialise l'interface
-        /// </summary>
-        private void ResetForm()
-        {
-            ToggleSelection();
-            ToggleButtons();
-            EmptyPersFields();
-            txtLastName.Enabled = false;
-            txtFirstName.Enabled = false;
-            txtPhone.Enabled = false;
-            txtMail.Enabled = false;
-            cboDept.Enabled = false;
-            cboDept.Text = "";
-            cboAction.Text = "Gérer le personnel";
         }
 
         /// <summary>
@@ -132,47 +104,59 @@ namespace Sleave.view
         /// <param name="e"></param>
         private void BtnValid_Click(object sender, EventArgs e)
         {
-            switch (cboAction.SelectedIndex)
+            // Récupérer personnel
+            Personnel personnel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
+            // Afficher
+            if (cboAction.SelectedIndex == 3)
             {
-                // Ajouter 
-                case 0:
-                    if (CheckPersFields())
-                    {
-                        Dept deptAdd = (Dept)bdgDepts.List[bdgDepts.Position];
-                        Personnel persAdd = new Personnel(0, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, deptAdd.GetIdDept, deptAdd.GetName);
-                        controller.AddPersonnel(persAdd);
-                    }
-                    break;
-                // Supprimer
-                case 1:
-                    Personnel persDel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
-                    if (ConfirmChange("Supprimer le personnel n° " + persDel.GetIdPersonnel + " : " + persDel.GetFirstName + " " + persDel.GetLastName + " ?", "Supprimer")){
-                        controller.DeleteAllAbsences(persDel.GetIdPersonnel);
-                        controller.DeletePersonnel(persDel);
-                    }
-                    break;
-                // Modifier
-                case 2:
-                    if (CheckPersFields())
-                    {
-                        Personnel persMod = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
-                        if (ConfirmChange("Modifier le personnel n° " + persMod.GetIdPersonnel + " : " + persMod.GetFirstName + " " + persMod.GetLastName + " ?", "Modifier"))
-                        {
-                            Dept deptUp = (Dept)bdgDepts.List[bdgDepts.Position];
-                            Personnel persUp = new Personnel(persMod.GetIdPersonnel, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, deptUp.GetIdDept, deptUp.GetName);
-                            controller.UpdatePersonnel(persUp);
-                        }
-                    }
-                    break;
-                case 3:
-                    Personnel personnelAbs = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
-                    controller.OpenFrmAbsence(this, personnelAbs);
-                    break;
+                controller.OpenFrmAbsence(this, personnel);
+                ResetForm();
             }
+            // Supprimer 
+            else if (cboAction.SelectedIndex == 1)
+            {
+                if (ConfirmAction("Supprimer le personnel n° " + personnel.GetIdPersonnel + " : " + personnel.GetFirstName + " " + personnel.GetLastName + " ?", "Supprimer"))
+                {
+                    controller.DeleteAllAbsences(personnel.GetIdPersonnel);
+                    controller.DeletePersonnel(personnel);
+                    ResetForm();
+                    bdgPersonnel.MoveFirst();
+                }
+            }
+            // Verifier champs
+            else if (CheckPersFields())
+            {
+                // Récupérer service
+                Dept dept = (Dept)bdgDepts.List[bdgDepts.Position];
+                // Modifier
+                if (cboAction.SelectedIndex == 2)
+                {
+                    if (ConfirmAction("Modifier le personnel n° " + personnel.GetIdPersonnel + " : " + personnel.GetFirstName + " " + personnel.GetLastName + " ?", "Modifier"))
+                    {
+                        Personnel persUp = new Personnel(personnel.GetIdPersonnel, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, dept.GetIdDept, dept.GetName);
+                        controller.UpdatePersonnel(persUp);
+                        ResetForm();
+                    }
+                }
+                // Ajouter
+                if (cboAction.SelectedIndex == 0)
+                {
+                    Personnel persAdd = new Personnel(0, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, dept.GetIdDept, dept.GetName);
+                    controller.AddPersonnel(persAdd);
+                    ResetForm();
+                    bdgPersonnel.MoveLast();
+                }
+            }            
+        }
+
+        /// <summary>
+        /// Annule l'action et réinitialise l'interface
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
             ResetForm();
-            BindDGVPersonnel();
-            ResizeDGVPersonnel();
-            bdgPersonnel.MoveFirst();
         }
 
         /// <summary>
@@ -245,7 +229,30 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Active ou désactive les champs d'information/ de saisie du personnel
+        /// Réinitialise l'interface
+        /// </summary>
+        private void ResetForm()
+        {
+            ToggleSelection();
+            ToggleButtons();
+            BindDGVPersonnel();
+            ResizeDGVPersonnel();
+            cboAction.SelectedIndex = -1;
+            txtLastName.Enabled = false;
+            txtFirstName.Enabled = false;
+            txtPhone.Enabled = false;
+            txtMail.Enabled = false;
+            cboDept.Enabled = false;
+            txtLastName.Text = "";
+            txtFirstName.Text = "";
+            txtPhone.Text = "";
+            txtMail.Text = "";
+            cboDept.SelectedIndex = -1;
+            cboDept.Text = "";
+        }
+
+        /// <summary>
+        /// Active ou désactive les champs d'informations/ de saisie du personnel
         /// </summary>
         private void TogglePersFields()
         {
@@ -275,18 +282,6 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Vide les champs d'information/ de saisie du personnel
-        /// </summary>
-        private void EmptyPersFields()
-        {
-            txtLastName.Text = "";
-            txtFirstName.Text = "";
-            txtPhone.Text = "";
-            txtMail.Text = "";
-            cboDept.Text = "";
-        }
-
-        /// <summary>
         /// Récupère le personnel selectionné et affiche ses informations dans les champs
         /// </summary>
         private void GetPersFields()
@@ -299,7 +294,6 @@ namespace Sleave.view
             cboDept.Text = pers.GetDept;
         }
 
-
         /// <summary>
         /// Verifie que tous les champs sont remplis et que le service choisi existe
         /// </summary>
@@ -308,7 +302,7 @@ namespace Sleave.view
         {
             if (txtLastName.Text.Equals("") || txtFirstName.Text.Equals("") || txtPhone.Text.Equals("") || txtMail.Text.Equals("") || cboDept.Text.Equals(""))
             {
-                MessageBox.Show("Tous les champs sont obligatoires.");
+                MessageBox.Show("Tous les champs sont obligatoires.", "Saisie", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             string value = cboDept.Text;
@@ -317,36 +311,36 @@ namespace Sleave.view
             cboDept.Text = value;
             if (index < 0 || cboDept.SelectedIndex < 0)
             {
-                MessageBox.Show("Choisissez un service existant.");
+                MessageBox.Show("Choisissez un service existant.", "Service", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             return true;
         }
 
         /// <summary>
-        /// Verifie qu'un élément est présent dans la grille de données des personnels
+        /// Réinitialise le texte de liste d'action et informe l'utlisateur si aucun élément de la grille de données n'est selectionné
         /// </summary>
         /// <returns>Vrai ou Faux</returns>
         private bool CheckDGVIndex()
         {
-            if (dgvPersonnel.RowCount < 0)
+            if (dgvPersonnel.RowCount < 1)
             {
-                MessageBox.Show("Aucun personnel n'est selectionné.");
+                MessageBox.Show("Aucun personnel n'est selectionné.", "Personnel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 ToggleSelection();
                 ToggleButtons();
-                cboAction.Text = "Gérer le personnel";
+                cboAction.SelectedIndex = -1;
                 return false;
             }
             return true;
         }
 
         /// <summary>
-        /// Demande la confirmation de pousuivre l'action 
+        /// Demande la confirmation de poursuivre l'action 
         /// </summary>
         /// <param name="message"></param>
         /// <param name="title"></param>
         /// <returns>Vrai ou Faux</returns>
-        private bool ConfirmChange(string message, string title)
+        private bool ConfirmAction(string message, string title)
         {
             if (MessageBox.Show(message, title, MessageBoxButtons.YesNo) == DialogResult.Yes)
             {

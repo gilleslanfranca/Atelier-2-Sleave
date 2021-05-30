@@ -29,10 +29,10 @@ namespace Sleave.view
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.txtMail = new System.Windows.Forms.TextBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
@@ -53,30 +53,34 @@ namespace Sleave.view
             // txtLastName
             // 
             this.txtLastName.Location = new System.Drawing.Point(212, 262);
+            this.txtLastName.MaxLength = 50;
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(175, 20);
-            this.txtLastName.TabIndex = 2;
+            this.txtLastName.TabIndex = 1;
             // 
             // txtMail
             // 
             this.txtMail.Location = new System.Drawing.Point(212, 361);
+            this.txtMail.MaxLength = 128;
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(175, 20);
-            this.txtMail.TabIndex = 3;
+            this.txtMail.TabIndex = 4;
             // 
             // txtPhone
             // 
             this.txtPhone.Location = new System.Drawing.Point(212, 329);
+            this.txtPhone.MaxLength = 15;
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(175, 20);
-            this.txtPhone.TabIndex = 4;
+            this.txtPhone.TabIndex = 3;
             // 
             // txtFirstName
             // 
             this.txtFirstName.Location = new System.Drawing.Point(212, 294);
+            this.txtFirstName.MaxLength = 50;
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(175, 20);
-            this.txtFirstName.TabIndex = 5;
+            this.txtFirstName.TabIndex = 2;
             // 
             // cboDept
             // 
@@ -84,7 +88,7 @@ namespace Sleave.view
             this.cboDept.Location = new System.Drawing.Point(212, 393);
             this.cboDept.Name = "cboDept";
             this.cboDept.Size = new System.Drawing.Size(175, 21);
-            this.cboDept.TabIndex = 6;
+            this.cboDept.TabIndex = 5;
             // 
             // label1
             // 
@@ -134,10 +138,12 @@ namespace Sleave.view
             // cboAction
             // 
             this.cboAction.FormattingEnabled = true;
+            this.cboAction.ItemHeight = 13;
             this.cboAction.Location = new System.Drawing.Point(478, 262);
             this.cboAction.Name = "cboAction";
             this.cboAction.Size = new System.Drawing.Size(175, 21);
-            this.cboAction.TabIndex = 12;
+            this.cboAction.TabIndex = 0;
+            this.cboAction.TabStop = false;
             this.cboAction.SelectedIndexChanged += new System.EventHandler(this.CboAction_SelectedIndexChanged);
             // 
             // btnValid
@@ -145,7 +151,7 @@ namespace Sleave.view
             this.btnValid.Location = new System.Drawing.Point(478, 295);
             this.btnValid.Name = "btnValid";
             this.btnValid.Size = new System.Drawing.Size(75, 23);
-            this.btnValid.TabIndex = 13;
+            this.btnValid.TabIndex = 6;
             this.btnValid.Text = "Valider";
             this.btnValid.UseVisualStyleBackColor = true;
             this.btnValid.Click += new System.EventHandler(this.BtnValid_Click);
@@ -155,7 +161,7 @@ namespace Sleave.view
             this.btnCancel.Location = new System.Drawing.Point(578, 295);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 14;
+            this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "Annuler";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
@@ -166,31 +172,31 @@ namespace Sleave.view
             this.dgvPersonnel.AllowUserToDeleteRows = false;
             this.dgvPersonnel.AllowUserToResizeColumns = false;
             this.dgvPersonnel.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvPersonnel.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvPersonnel.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPersonnel.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvPersonnel.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPersonnel.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPersonnel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPersonnel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPersonnel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPersonnel.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPersonnel.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvPersonnel.EnableHeadersVisualStyles = false;
             this.dgvPersonnel.GridColor = System.Drawing.SystemColors.ScrollBar;
             this.dgvPersonnel.Location = new System.Drawing.Point(12, 12);
@@ -198,19 +204,20 @@ namespace Sleave.view
             this.dgvPersonnel.Name = "dgvPersonnel";
             this.dgvPersonnel.ReadOnly = true;
             this.dgvPersonnel.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPersonnel.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPersonnel.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvPersonnel.RowHeadersVisible = false;
             this.dgvPersonnel.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvPersonnel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPersonnel.Size = new System.Drawing.Size(751, 221);
-            this.dgvPersonnel.TabIndex = 32;
+            this.dgvPersonnel.TabIndex = 0;
+            this.dgvPersonnel.TabStop = false;
             // 
             // FrmPersonnel
             // 
