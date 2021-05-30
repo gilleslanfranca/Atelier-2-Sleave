@@ -43,7 +43,7 @@ namespace Sleave.view
         BindingSource bdgDepts = new BindingSource();
 
         /// <summary>
-        /// Initialise les éléments de l'interface du personnel
+        /// Contructeur : Initialise les éléments de l'interface de gestion du personnel
         /// </summary>
         public FrmPersonnel(Controller controller)
         {
@@ -177,7 +177,7 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Initialise la grille de données du personnel
+        /// Initialise la grille de données des personnels
         /// </summary>
         private void BindDGVPersonnel()
         {
@@ -212,7 +212,7 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Redessine la grille de données
+        /// Redessine la grille de données des personnels
         /// </summary>
         private void DrawDGVPersonnel()
         {
@@ -242,13 +242,12 @@ namespace Sleave.view
             }
             else
             {
-
                 dgvPersonnel.Columns["GetMail"].Width = fieldWidthUnit * 8;
             }
         }
 
         /// <summary>
-        /// Active ou désactive le champs d'information du personnel
+        /// Active ou désactive les champs d'information/ de saisie du personnel
         /// </summary>
         private void TogglePersFields()
         {
@@ -328,7 +327,7 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Verifie qu'un élément est présent dans la grillé
+        /// Verifie qu'un élément est présent dans la grille de données des personnels
         /// </summary>
         /// <returns></returns>
         private bool CheckDGVIndex()
@@ -359,13 +358,6 @@ namespace Sleave.view
                 return true;
             }
             return false;
-
-
-        }
-
-        private void FrmPersonnel_Load(object sender, EventArgs e)
-        {
-
-        }
+        }     
     }
 }

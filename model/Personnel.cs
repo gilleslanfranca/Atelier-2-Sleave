@@ -11,12 +11,39 @@ namespace Sleave.model
     /// </summary>
     public class Personnel
     {
+        /// <summary>
+        /// Identifiant du personnel
+        /// </summary>
         private int idPersonnel;
+
+        /// <summary>
+        /// Nom du personnel
+        /// </summary>
         private string lastName;
+        
+        /// <summary>
+        /// Prénom du personnel
+        /// </summary>
         private string firstName;
+
+        /// <summary>
+        /// N° de télephone du personnel
+        /// </summary>
         private string phone;
+
+        /// <summary>
+        /// Adresse Email du personnel
+        /// </summary>
         private string mail;
+
+        /// <summary>
+        /// Identidiant du service du personnel
+        /// </summary>
         private int idDept;
+
+        /// <summary>
+        /// Nom du service du personnel
+        /// </summary>
         private string dept;
 
         /// <summary>

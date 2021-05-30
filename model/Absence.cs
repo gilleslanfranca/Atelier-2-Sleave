@@ -11,12 +11,39 @@ namespace Sleave.model
     /// </summary>
     public class Absence
     {
+        /// <summary>
+        /// Identifiant du personnel
+        /// </summary>
         private int idPersonnel;
+
+        /// <summary>
+        /// Nom du personnel
+        /// </summary>
         private string lastName;
+
+        /// <summary>
+        /// Prénom du personnel
+        /// </summary>
         private string firstName;
+
+        /// <summary>
+        /// Début de l'absence (Date)
+        /// </summary>
         private DateTime dateStart;
+
+        /// <summary>
+        /// Fin  de l'absence (Date)
+        /// </summary>
         private DateTime dateEnd;
+
+        /// <summary>
+        /// Iditifiant du motif d'absence
+        /// </summary>
         private int idReason;
+
+        /// <summary>
+        /// Libellé du motif d'absence
+        /// </summary>
         private string reason;
 
         /// <summary>

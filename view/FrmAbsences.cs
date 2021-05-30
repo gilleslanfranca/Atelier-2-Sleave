@@ -33,7 +33,7 @@ namespace Sleave.view
         private Controller controller;
 
         /// <summary>
-        /// instance du personnel géré dans l'interface
+        /// Instance du personnel géré dans l'interface
         /// </summary>
         private Personnel pers;
 
@@ -43,32 +43,33 @@ namespace Sleave.view
         BindingSource bdgAbsences = new BindingSource();
 
         /// <summary>
-        /// Objet source gérant la liste des raison
+        /// Objet source gérant la liste des raisons
         /// </summary>
         BindingSource bdgReasons = new BindingSource();
 
         /// <summary>
-        /// Interface appellant cette objet
+        /// Interface appellant cet objet
         /// </summary>
         private FrmPersonnel frmPersonnel;
 
         /// <summary>
-        /// 
+        /// Constructeur : Initialise les éléments de l'interface de gestion des absences
         /// </summary>
-        public FrmAbsences(Controller controller, Personnel persAbsence, FrmPersonnel frmPersonnel)
+        public FrmAbsences(Controller controller, Personnel pers, FrmPersonnel frmPersonnel)
         {
             this.controller = controller;
-            this.pers = persAbsence;
+            this.pers = pers;
             this.frmPersonnel = frmPersonnel;
             InitializeComponent();
-            txtLastname.Text = persAbsence.GetLastName;
-            txtFirstName.Text = persAbsence.GetFirstName;
+            txtLastname.Text = pers.GetLastName;
+            txtFirstName.Text = pers.GetFirstName;
             ToggleButtons();
             DisableAbsFields();
             BindDGVAbsences();
             BindDGVReasons();
             BindActions();
             DrawDGVAbsences();
+            ResizeDGVAbsences();
         }
 
         /// <summary>
@@ -87,7 +88,7 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Redessine la grille de données
+        /// Redessine la grille de données des absences
         /// </summary>
         private void DrawDGVAbsences()
         {
@@ -104,7 +105,7 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Defini la taille du champs Motifselon le nombre de ligne dans la grille de données
+        /// Defini la taille du champs Motif selon le nombre de ligne dans la grille de données
         /// </summary>
         private void ResizeDGVAbsences()
         {
@@ -114,13 +115,12 @@ namespace Sleave.view
             }
             else
             {
-
                 dgvAbsences.Columns["GetReason"].Width = fieldWidthUnit * 7;
             }
         }
 
         /// <summary>
-        /// Initialise la grille de données du personnel
+        /// Initialise la grille de données des absences
         /// </summary>
         private void BindDGVAbsences()
         {
@@ -130,7 +130,7 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Initialise la grille de données des services
+        /// Initialise la liste déroulante des motifs
         /// </summary>
         private void BindDGVReasons()
         {
@@ -154,6 +154,9 @@ namespace Sleave.view
             cboAction.Items.Add("Afficher les absences");
         }
 
+        /// <summary>
+        /// Active les champs d'information/ de saisie de l'absence
+        /// </summary>
         private void EnableAbsFields()
         {
             dtpStart.Enabled = true;
@@ -161,6 +164,10 @@ namespace Sleave.view
             cboReason.Enabled = true;
         }
 
+
+        /// <summary>
+        /// Désactive les champs d'information/ de saisie de l'absence
+        /// </summary>
         private void DisableAbsFields()
         {
             dtpStart.Enabled = false;
@@ -169,7 +176,7 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Désactive les dates d'absence
+        /// Désactive les dates d'absences
         /// </summary>
         private void DisableDateFields()
         {
@@ -195,5 +202,15 @@ namespace Sleave.view
             btnValid.Enabled = !btnValid.Enabled;
         }
 
+
+        /// <summary>
+        /// Recherche l'action demandé après selection
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cboAction_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

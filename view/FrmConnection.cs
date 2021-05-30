@@ -17,12 +17,12 @@ namespace Sleave.view
     public partial class FrmConnection : Form
     {
         /// <summary>
-        /// Instance du controller
+        /// Instance du contrôleur
         /// </summary>
         private Controller controller;
         
         /// <summary>
-        /// Initialise les éléments de l'interface de connexion
+        /// Constructeur : Initialise les éléments de l'interface de connexion
         /// </summary>
         public FrmConnection(Controller controller)
         {
@@ -31,6 +31,11 @@ namespace Sleave.view
 
         }
 
+        /// <summary>
+        /// Verfifie que les champs sont remplis et demande l'accès à la BDD au contrôleur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnConnection_Click(object sender, EventArgs e)
         {
             if (!txtLogin.Text.Equals("") && !txtPwd.Text.Equals(""))
