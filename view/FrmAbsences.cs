@@ -133,15 +133,18 @@ namespace Sleave.view
                     break;
                 // Supprimer
                 case 1:
-
-                    if (ConfirmChange("Supprimer l'absence du " + txtDateStart.Text + " au " + txtDateStart.Text + " ?", "Supprimer"))
+                    if (bdgAbsences.Count > 0)
                     {
-                        Absence absenceDel = (Absence)bdgAbsences.List[bdgAbsences.Position];
-                        controller.DelAbsence(absenceDel);
-                    }
+                        if (ConfirmChange("Supprimer l'absence du " + txtDateStart.Text + " au " + txtDateStart.Text + " ?", "Supprimer"))
+                        {
+                            Absence absenceDel = (Absence)bdgAbsences.List[bdgAbsences.Position];
+                            controller.DelAbsence(absenceDel);
+                        }
+                    }   
                     break;
                 // Modifier
                 case 2:
+                    
                     break;
                 case 3:
                     break;
