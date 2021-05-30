@@ -59,7 +59,7 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Recherche l'action demandé après selection
+        /// Recherche l'action demandée après selection
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -121,7 +121,6 @@ namespace Sleave.view
             txtPhone.Enabled = false;
             txtMail.Enabled = false;
             cboDept.Enabled = false;
-            cboDept.SelectedIndex = -1;
             cboDept.Text = "";
             cboAction.Text = "Gérer le personnel";
         }
@@ -194,7 +193,6 @@ namespace Sleave.view
             List<Dept> depts = controller.GetDepts();
             bdgDepts.DataSource = depts;
             cboDept.DataSource = bdgDepts;
-            cboDept.SelectedIndex = -1;
             cboDept.Text = "";
         }
 
@@ -285,7 +283,6 @@ namespace Sleave.view
             txtFirstName.Text = "";
             txtPhone.Text = "";
             txtMail.Text = "";
-            cboDept.SelectedIndex = -1;
             cboDept.Text = "";
         }
 
@@ -320,7 +317,7 @@ namespace Sleave.view
             cboDept.Text = value;
             if (index < 0 || cboDept.SelectedIndex < 0)
             {
-                MessageBox.Show("Choisissez un service.");
+                MessageBox.Show("Choisissez un service existant.");
                 return false;
             }
             return true;
@@ -337,7 +334,6 @@ namespace Sleave.view
                 MessageBox.Show("Aucun personnel n'est selectionné.");
                 ToggleSelection();
                 ToggleButtons();
-                cboAction.SelectedIndex = -1;
                 cboAction.Text = "Gérer le personnel";
                 return false;
             }

@@ -62,7 +62,7 @@ namespace Sleave.view
             this.btnConnection.TabIndex = 3;
             this.btnConnection.Text = "se connecter";
             this.btnConnection.UseVisualStyleBackColor = true;
-            this.btnConnection.Click += new System.EventHandler(this.btnConnection_Click);
+            this.btnConnection.Click += new System.EventHandler(this.BtnConnection_Click);
             // 
             // txtLogin
             // 

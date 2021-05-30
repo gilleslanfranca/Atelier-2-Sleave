@@ -126,6 +126,15 @@ namespace Sleave.control
         }
 
         /// <summary>
+        /// Demande l'ajout d'une absence à DataAccess
+        /// </summary>
+        /// <param name="absence"></param>
+        public void AddAbsence(Absence absence)
+        {
+            DataAccess.AddAbsence(absence);
+        }
+
+        /// <summary>
         /// Demande la modification d'un personnel à DataAccess
         /// </summary>
         /// <param name="persUp"></param>
