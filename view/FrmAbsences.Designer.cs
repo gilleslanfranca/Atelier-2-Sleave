@@ -29,10 +29,10 @@ namespace Sleave.view
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnValid = new System.Windows.Forms.Button();
             this.cboAction = new System.Windows.Forms.ComboBox();
@@ -57,7 +57,7 @@ namespace Sleave.view
             this.btnCancel.Location = new System.Drawing.Point(580, 236);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 27;
+            this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Annuler";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
@@ -67,7 +67,7 @@ namespace Sleave.view
             this.btnValid.Location = new System.Drawing.Point(480, 236);
             this.btnValid.Name = "btnValid";
             this.btnValid.Size = new System.Drawing.Size(75, 23);
-            this.btnValid.TabIndex = 26;
+            this.btnValid.TabIndex = 4;
             this.btnValid.Text = "Valider";
             this.btnValid.UseVisualStyleBackColor = true;
             this.btnValid.Click += new System.EventHandler(this.BtnValid_Click);
@@ -78,7 +78,8 @@ namespace Sleave.view
             this.cboAction.Location = new System.Drawing.Point(480, 203);
             this.cboAction.Name = "cboAction";
             this.cboAction.Size = new System.Drawing.Size(175, 21);
-            this.cboAction.TabIndex = 25;
+            this.cboAction.TabIndex = 0;
+            this.cboAction.TabStop = false;
             this.cboAction.SelectedIndexChanged += new System.EventHandler(this.CboAction_SelectedIndexChanged);
             // 
             // lblReason
@@ -129,10 +130,11 @@ namespace Sleave.view
             // cboReason
             // 
             this.cboReason.FormattingEnabled = true;
+            this.cboReason.ItemHeight = 13;
             this.cboReason.Location = new System.Drawing.Point(480, 154);
             this.cboReason.Name = "cboReason";
             this.cboReason.Size = new System.Drawing.Size(175, 21);
-            this.cboReason.TabIndex = 19;
+            this.cboReason.TabIndex = 3;
             // 
             // txtFirstName
             // 
@@ -140,7 +142,7 @@ namespace Sleave.view
             this.txtFirstName.Location = new System.Drawing.Point(480, 55);
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(175, 20);
-            this.txtFirstName.TabIndex = 18;
+            this.txtFirstName.TabIndex = 0;
             // 
             // txtDateStart
             // 
@@ -148,7 +150,7 @@ namespace Sleave.view
             this.txtDateStart.Location = new System.Drawing.Point(480, 87);
             this.txtDateStart.Name = "txtDateStart";
             this.txtDateStart.Size = new System.Drawing.Size(175, 20);
-            this.txtDateStart.TabIndex = 17;
+            this.txtDateStart.TabIndex = 1;
             // 
             // txtDateEnd
             // 
@@ -156,7 +158,7 @@ namespace Sleave.view
             this.txtDateEnd.Location = new System.Drawing.Point(480, 122);
             this.txtDateEnd.Name = "txtDateEnd";
             this.txtDateEnd.Size = new System.Drawing.Size(175, 20);
-            this.txtDateEnd.TabIndex = 16;
+            this.txtDateEnd.TabIndex = 2;
             // 
             // txtLastname
             // 
@@ -164,7 +166,7 @@ namespace Sleave.view
             this.txtLastname.Location = new System.Drawing.Point(480, 23);
             this.txtLastname.Name = "txtLastname";
             this.txtLastname.Size = new System.Drawing.Size(175, 20);
-            this.txtLastname.TabIndex = 15;
+            this.txtLastname.TabIndex = 0;
             // 
             // dgvAbsences
             // 
@@ -172,31 +174,31 @@ namespace Sleave.view
             this.dgvAbsences.AllowUserToDeleteRows = false;
             this.dgvAbsences.AllowUserToResizeColumns = false;
             this.dgvAbsences.AllowUserToResizeRows = false;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvAbsences.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvAbsences.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvAbsences.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvAbsences.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvAbsences.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAbsences.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAbsences.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvAbsences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAbsences.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAbsences.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvAbsences.EnableHeadersVisualStyles = false;
             this.dgvAbsences.GridColor = System.Drawing.SystemColors.ScrollBar;
             this.dgvAbsences.Location = new System.Drawing.Point(12, 12);
@@ -204,19 +206,20 @@ namespace Sleave.view
             this.dgvAbsences.Name = "dgvAbsences";
             this.dgvAbsences.ReadOnly = true;
             this.dgvAbsences.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAbsences.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAbsences.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvAbsences.RowHeadersVisible = false;
             this.dgvAbsences.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvAbsences.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAbsences.Size = new System.Drawing.Size(376, 265);
-            this.dgvAbsences.TabIndex = 33;
+            this.dgvAbsences.TabIndex = 0;
+            this.dgvAbsences.TabStop = false;
             // 
             // dtpStart
             // 
