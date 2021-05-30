@@ -46,10 +46,10 @@ namespace Sleave.view
             this.txtDateStart = new System.Windows.Forms.TextBox();
             this.txtDateEnd = new System.Windows.Forms.TextBox();
             this.txtLastname = new System.Windows.Forms.TextBox();
-            this.dgvAbsence = new System.Windows.Forms.DataGridView();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAbsence)).BeginInit();
+            this.dgvAbsences = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAbsences)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -159,52 +159,6 @@ namespace Sleave.view
             this.txtLastname.Size = new System.Drawing.Size(175, 20);
             this.txtLastname.TabIndex = 15;
             // 
-            // dgvAbsence
-            // 
-            this.dgvAbsence.AllowUserToAddRows = false;
-            this.dgvAbsence.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvAbsence.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvAbsence.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgvAbsence.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAbsence.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvAbsence.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAbsence.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvAbsence.EnableHeadersVisualStyles = false;
-            this.dgvAbsence.Location = new System.Drawing.Point(13, 12);
-            this.dgvAbsence.MultiSelect = false;
-            this.dgvAbsence.Name = "dgvAbsence";
-            this.dgvAbsence.ReadOnly = true;
-            this.dgvAbsence.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAbsence.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvAbsence.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAbsence.Size = new System.Drawing.Size(490, 412);
-            this.dgvAbsence.TabIndex = 28;
-            // 
             // dtpStart
             // 
             this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
@@ -221,12 +175,64 @@ namespace Sleave.view
             this.dtpEnd.Size = new System.Drawing.Size(175, 20);
             this.dtpEnd.TabIndex = 30;
             // 
+            // dgvAbsences
+            // 
+            this.dgvAbsences.AllowUserToAddRows = false;
+            this.dgvAbsences.AllowUserToDeleteRows = false;
+            this.dgvAbsences.AllowUserToResizeColumns = false;
+            this.dgvAbsences.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvAbsences.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvAbsences.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvAbsences.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvAbsences.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAbsences.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvAbsences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAbsences.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvAbsences.EnableHeadersVisualStyles = false;
+            this.dgvAbsences.GridColor = System.Drawing.SystemColors.WindowFrame;
+            this.dgvAbsences.Location = new System.Drawing.Point(14, 12);
+            this.dgvAbsences.MultiSelect = false;
+            this.dgvAbsences.Name = "dgvAbsences";
+            this.dgvAbsences.ReadOnly = true;
+            this.dgvAbsences.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAbsences.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvAbsences.RowHeadersVisible = false;
+            this.dgvAbsences.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgvAbsences.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAbsences.Size = new System.Drawing.Size(502, 412);
+            this.dgvAbsences.TabIndex = 31;
+            // 
             // FrmAbsences
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dgvAbsence);
+            this.Controls.Add(this.dgvAbsences);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnValid);
             this.Controls.Add(this.cboAction);
@@ -248,7 +254,8 @@ namespace Sleave.view
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestion des absences";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAbsence)).EndInit();
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmAbsences_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAbsences)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,8 +276,8 @@ namespace Sleave.view
         private System.Windows.Forms.TextBox txtDateStart;
         private System.Windows.Forms.TextBox txtDateEnd;
         private System.Windows.Forms.TextBox txtLastname;
-        private System.Windows.Forms.DataGridView dgvAbsence;
         private System.Windows.Forms.DateTimePicker dtpStart;
         private System.Windows.Forms.DateTimePicker dtpEnd;
+        private System.Windows.Forms.DataGridView dgvAbsences;
     }
 }
