@@ -28,12 +28,12 @@ namespace Sleave.model
         private DateTime dateStart;
 
         /// <summary>
-        /// Fin  de l'absence (Date)
+        /// Fin de l'absence (Date)
         /// </summary>
         private DateTime dateEnd;
 
         /// <summary>
-        /// Iditifiant du motif d'absence
+        /// Identifiant du motif d'absence
         /// </summary>
         private int idReason;
 
@@ -78,15 +78,15 @@ namespace Sleave.model
         public string GetReason { get => reason; }
 
         /// <summary>
-        /// Constructeur de l'absence : valorise les propriétés
+        /// Constructeur de l'absence : Valorise les propriétés
         /// </summary>
-        /// <param name="idPersonnel"></param>
-        /// <param name="lastName"></param>
-        /// <param name="firstName"></param>
-        /// <param name="dateStart"></param>
-        /// <param name="dateEnd"></param>
-        /// <param name="idReason"></param>
-        /// <param name="reason"></param>
+        /// <param name="idPersonnel">ID du personnel</param>
+        /// <param name="lastName">Nom du personnel</param>
+        /// <param name="firstName">Prénom du personnel</param>
+        /// <param name="dateStart">Date de début d'absence</param>
+        /// <param name="dateEnd">Date de fin d'absence</param>
+        /// <param name="idReason">ID du motif</param>
+        /// <param name="reason">Libellé du motif</param>
         public Absence(int idPersonnel, string lastName, string firstName, DateTime dateStart, DateTime dateEnd, int idReason, string reason)
         {
             this.idPersonnel = idPersonnel;

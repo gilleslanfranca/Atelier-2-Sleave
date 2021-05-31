@@ -17,17 +17,17 @@ namespace Sleave.view
         private const int fieldWidthUnit = 25;
 
         /// <summary>
-        /// Constante : Nombre maximal de ligne affichée sans barre déroulante
+        /// Constante : Nombre maximal de lignes affichée sans barre déroulante
         /// </summary>
         private const int maxRows = 12;
 
         /// <summary>
-        /// Constante : Chaine nom de la liste d'actions déroulante
+        /// Constante : Chaîne nom de la liste d'actions déroulante
         /// </summary>
         private const string actionText = "Gérer les absences";
 
         /// <summary>
-        /// Instance de controle
+        /// Instance de contrôle
         /// </summary>
         private Controller controller;
 
@@ -54,6 +54,9 @@ namespace Sleave.view
         /// <summary>
         /// Constructeur : Initialise les éléments de l'interface de gestion des absences
         /// </summary>
+        /// <param name="controller">Contrôleur</param>
+        /// <param name="pers">Personnel concerné</param>
+        /// <param name="frmPersonnel">Interface de gestion du personnel</param>
         public FrmAbsences(Controller controller, Personnel pers, FrmPersonnel frmPersonnel)
         {
             this.controller = controller;
@@ -75,8 +78,8 @@ namespace Sleave.view
         /// <summary>
         /// Recherche l'action demandée et prépare l'interface
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">L'objet concerné</param>
+        /// <param name="e">L'évènement déclancheur</param>
         private void CboAction_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Le code peut être simplifié mais il est beaucoup plus lisible ainsi
@@ -117,8 +120,8 @@ namespace Sleave.view
         /// <summary>
         /// Corrige la date de fin si elle est plus petite que la date de début
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">L'objet concerné</param>
+        /// <param name="e">L'évènement déclancheur</param>
         private void DtpStart_ValueChanged(object sender, EventArgs e)
         {
             if (dtpEnd.Value.Date < dtpStart.Value.Date)
@@ -130,8 +133,8 @@ namespace Sleave.view
         /// <summary>
         /// Corrige la date de début si elle est plus grande que la date de fin
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">L'objet concerné</param>
+        /// <param name="e">L'évènement déclancheur</param>
         private void DtpEnd_ValueChanged(object sender, EventArgs e)
         {
             if (dtpEnd.Value.Date < dtpStart.Value.Date)
@@ -141,10 +144,10 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Verifie et valide l'action demandée 
+        /// Vérifie et valide l'action demandée 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">L'objet déclancheur</param>
+        /// <param name="e">L'évènement déclancheur</param>
         private void BtnValid_Click(object sender, EventArgs e)
         {
             // Le code peut être simplifié mais il est beaucoup plus lisible ainsi
@@ -187,20 +190,20 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Annule l'action et reinitialise l'interface
+        /// Annule l'action et réinitialise l'interface
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">L'Objet concerné</param>
+        /// <param name="e">L'évènement déclancheur</param>
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             ResetForm();
         }
 
         /// <summary>
-        /// Ferme l'interface et ouvre l'interface "Gestion du personnel"
+        /// Ferme l'interface et ouvre l'interface de gestion du personnel
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">L'objet concerné</param>
+        /// <param name="e">L'évènement déclancheur</param>
         private void FrmAbsences_FormClosing(Object sender, FormClosingEventArgs e)
         {
             controller.OpenFrmPersonnel(frmPersonnel);
@@ -241,7 +244,7 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Defini la taille du champs Motif selon le nombre de ligne dans la grille de données
+        /// Defini la taille du champs motif selon le nombre de lignes dans la grille de données
         /// </summary>
         private void ResizeDGVAbsences()
         {
@@ -290,7 +293,7 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Active les champs d'informations/ de saisie
+        /// Active les champs d'informations/ de saisies
         /// </summary>
         private void SetFields()
         {
@@ -337,7 +340,7 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Verifie que tous le champ motif est rempli et que le motif choisi existe
+        /// Vérifie que tous le champ motif est rempli et que le motif choisi existe
         /// </summary>
         /// <returns>Vrai ou Faux</returns>
         private bool CheckReason()
@@ -360,9 +363,9 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Verifie les dates de l'absence
+        /// Vérifie les dates de l'absence
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Vrai ou Faux</returns>
         private bool CheckDatesOfAbsence(Absence absence)
         {
             foreach (Absence abs in bdgAbsences)
@@ -392,10 +395,10 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Demande la confirmation de poursuivre l'action 
+        /// Demande confirmation pour poursuivre l'action 
         /// </summary>
-        /// <param name="message"></param>
-        /// <param name="title"></param>
+        /// <param name="message">Message à afficher dans</param>
+        /// <param name="title">Titre du message</param>
         /// <returns>Vrai ou Faux</returns>
         private bool ConfirmChange(string message, string title)
         {

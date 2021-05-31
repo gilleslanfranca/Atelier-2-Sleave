@@ -17,17 +17,17 @@ namespace Sleave.view
         private const int fieldWidthUnit = 25;
 
         /// <summary>
-        /// Constante : Nombre maximal de ligne affichée sans barre déroulante
+        /// Constante : Nombre maximal de lignes affichée sans barre déroulante
         /// </summary>
         private const int maxRows = 9;
 
         /// <summary>
-        /// Constante : Chaine nom de la liste d'actions déroulante
+        /// Constante : Chaîne nom de la liste d'actions déroulante
         /// </summary>
         private const string actionText = "Gérer les absences";
 
         /// <summary>
-        /// Instance de controle
+        /// Instance de contrôle
         /// </summary>
         Controller controller;
 
@@ -44,6 +44,7 @@ namespace Sleave.view
         /// <summary>
         /// Contructeur : Initialise les éléments de l'interface de gestion du personnel
         /// </summary>
+        /// <param name="controller">Contrôleur</param>
         public FrmPersonnel(Controller controller)
         {
             this.controller = controller;
@@ -60,8 +61,8 @@ namespace Sleave.view
         /// <summary>
         /// Recherche l'action demandée et prépare l'interface
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">L'objet concerné</param>
+        /// <param name="e">L'évènement déclencheur</param>
         private void CboAction_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Le code peut être simplifié mais il est beaucoup plus lisible ainsi
@@ -102,10 +103,10 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Verifie et valide l'action demandée 
+        /// Vérifie et valide l'action demandée 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">L'objet concerné</param>
+        /// <param name="e">L'évènement déclencheur</param>
         private void BtnValid_Click(object sender, EventArgs e)
         {
             // Le code peut être simplifié mais il est beaucoup plus lisible ainsi
@@ -159,8 +160,8 @@ namespace Sleave.view
         /// <summary>
         /// Annule l'action 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">L'objet concerné</param>
+        /// <param name="e">L'évènement déclencheur</param>
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             ResetForm();
@@ -223,7 +224,7 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Defini la taille du champs Adresse Email selon le nombre de ligne dans la grille de données
+        /// Defini la taille du champs Adresse Email selon le nombre de lignes dans la grille de données
         /// </summary>
         private void ResizeDGVPersonnel() {
             if (dgvPersonnel.RowCount > maxRows)
@@ -260,7 +261,7 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Active ou désactive les champs d'informations/ de saisie du personnel
+        /// Active ou désactive les champs d'informations/ de saisies du personnel
         /// </summary>
         private void TogglePersFields()
         {
@@ -303,7 +304,7 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Verifie que tous les champs sont remplis et que le service choisi existe
+        /// Vérifie que tous les champs sont remplis et que le service choisi existe
         /// </summary>
         /// <returns>Vrai ou Faux</returns>
         private bool CheckPersFields()
@@ -341,10 +342,10 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Demande la confirmation de poursuivre l'action 
+        /// Demande confirmation pour poursuivre l'action 
         /// </summary>
-        /// <param name="message"></param>
-        /// <param name="title"></param>
+        /// <param name="message">Message à afficher</param>
+        /// <param name="title">Titre du message</param>
         /// <returns>Vrai ou Faux</returns>
         private bool ConfirmAction(string message, string title)
         {

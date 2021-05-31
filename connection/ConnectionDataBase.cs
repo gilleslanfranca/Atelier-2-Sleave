@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Sleave.connection
-{
-    class ConnectionDataBase
+{   
+    /// <summary>
+    /// Classe de connection à la base de données
+    /// </summary>
+     class ConnectionDataBase
     {
         /// <summary>
         /// Instance Unique de la classe

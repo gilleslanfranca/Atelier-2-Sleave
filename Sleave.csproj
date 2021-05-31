@@ -73,8 +73,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="connection\ConnectionDataBase.cs" />
+    <Compile Include="connection\NamespaceDoc.cs" />
     <Compile Include="control\Controller.cs" />
+    <Compile Include="control\NamespaceDoc.cs" />
     <Compile Include="dal\DataAccess.cs" />
+    <Compile Include="dal\NamespaceDoc.cs" />
     <Compile Include="mediatek86DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -82,8 +85,10 @@
     </Compile>
     <Compile Include="model\Absence.cs" />
     <Compile Include="model\Dept.cs" />
+    <Compile Include="model\NamespaceDoc.cs" />
     <Compile Include="model\Personnel.cs" />
     <Compile Include="model\Reason.cs" />
+    <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="view\FrmAbsences.cs">
@@ -104,6 +109,7 @@
     <Compile Include="view\FrmPersonnel.Designer.cs">
       <DependentUpon>FrmPersonnel.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\NamespaceDoc.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

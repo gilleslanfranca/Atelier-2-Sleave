@@ -26,19 +26,19 @@
         public string GetName { get => name; }
 
         /// <summary>
-        /// Constructeur du motif: valorise les propriétés
+        /// Constructeur du motif : Valorise les propriétés
         /// </summary>
-        /// <param name="idReason"></param>
-        /// <param name="name"></param>
+        /// <param name="idReason">ID du motif</param>
+        /// <param name="name">Libellé du motif</param>
         public Reason(int idReason, string name)
         {
             this.idReason = idReason;
             this.name = name;
         }
         /// <summary>
-        /// Retourne la chaine nom du motif 
+        /// Retourne la chaîne libellé du motif 
         /// </summary>
-        /// <returns>name</returns>
+        /// <returns>Libellé du motif</returns>
         public override string ToString()
         {
             return this.name;

@@ -21,12 +21,12 @@
         private string firstName;
 
         /// <summary>
-        /// N° de télephone du personnel
+        /// N° de téléphone du personnel
         /// </summary>
         private string phone;
 
         /// <summary>
-        /// Adresse Email du personnel
+        /// Adresse mail du personnel
         /// </summary>
         private string mail;
 
@@ -56,7 +56,7 @@
         public string GetFirstName { get => firstName; }
 
         /// <summary>
-        /// Getter sur le numéro de telephone du personnel
+        /// Getter sur le n° de téléphone du personnel
         /// </summary>
         public string GetPhone { get => phone; }
 
@@ -76,15 +76,15 @@
         public string GetDept { get => dept; }
 
         /// <summary>
-        /// Constructeur du personnel: valorise les propriétés
+        /// Constructeur du personnel : Valorise les propriétés
         /// </summary>
-        /// <param name="idPersonnel"></param>
-        /// <param name="lastName"></param>
-        /// <param name="firstName"></param>
-        /// <param name="phone"></param>
-        /// <param name="mail"></param>
-        /// <param name="idDept"></param>
-        /// <param name="dept"></param>
+        /// <param name="idPersonnel">ID du personnel</param>
+        /// <param name="lastName">Nom du personnel</param>
+        /// <param name="firstName">Prénom du personnel</param>
+        /// <param name="phone">Téléphone du personnel</param>
+        /// <param name="mail">Adresse Email du personnel</param>
+        /// <param name="idDept">ID de service du personnel</param>
+        /// <param name="dept">Nom du service du personnel</param>
         public Personnel(int idPersonnel, string lastName, string firstName, string phone, string mail, int idDept, string dept)
         {
             this.idPersonnel = idPersonnel;
