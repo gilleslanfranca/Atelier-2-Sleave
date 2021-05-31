@@ -120,27 +120,27 @@ namespace Sleave.view
                         Personnel persAdd = new Personnel(0, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, deptAdd.GetIdDept, deptAdd.GetName);
                         controller.AddPersonnel(persAdd);
                         ResetForm();
-                        bdgPersonnel.MoveLast();
                     }
                     break;
                 // Supprimer
                 case 1:
                     Personnel personnelDel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
-                    if (ConfirmAction("Supprimer le personnel n° " + personnelDel.GetIdPersonnel + " : " + personnelDel.GetFirstName + " " + personnelDel.GetLastName + " ?", "Supprimer"))
-                    {
+                    if (MessageBox.Show("Supprimer le personnel n° " + personnelDel.GetIdPersonnel + " : " + personnelDel.GetFirstName + " " + personnelDel.GetLastName 
+                        + " ?", "Supprimer", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    { 
                         controller.DeleteAllAbsences(personnelDel.GetIdPersonnel);
                         controller.DeletePersonnel(personnelDel);
-                        ResetForm();
-                        bdgPersonnel.MoveFirst();
                     }
+                    ResetForm();
                     break;
                 // Modifier
                 case 2:
                     if (CheckPersFields())
                     {
                         Personnel personnelMod = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
-                        if (ConfirmAction("Modifier le personnel n° " + personnelMod.GetIdPersonnel + " : " + personnelMod.GetFirstName + " " + personnelMod.GetLastName + " ?", "Modifier"))
-                        {
+                        if (MessageBox.Show("Modifier le personnel n° " + personnelMod.GetIdPersonnel + " : " + personnelMod.GetFirstName + " " + personnelMod.GetLastName
+                            + " ?", "Modifier", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        { 
                             Dept deptUp = (Dept)bdgDepts.List[bdgDepts.Position];
                             Personnel persUp = new Personnel(personnelMod.GetIdPersonnel, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, deptUp.GetIdDept, deptUp.GetName);
                             controller.UpdatePersonnel(persUp);
@@ -245,6 +245,7 @@ namespace Sleave.view
             ToggleSelection();
             ToggleButtons();
             BindDGVPersonnel();
+            bdgPersonnel.MoveFirst();
             ResizeDGVPersonnel();
             cboAction.SelectedIndex = -1;
             txtLastName.Enabled = false;
@@ -334,26 +335,11 @@ namespace Sleave.view
         {
             if (dgvPersonnel.RowCount < 1)
             {
-                MessageBox.Show("Aucun personnel n'est selectionné.", "Personnel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Aucun personnel selectionné.", "Personnel", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cboAction.SelectedIndex = -1;
                 return false;
             }
             return true;
         }
-
-        /// <summary>
-        /// Demande confirmation pour poursuivre l'action 
-        /// </summary>
-        /// <param name="message">Message à afficher</param>
-        /// <param name="title">Titre du message</param>
-        /// <returns>Vrai ou Faux</returns>
-        private bool ConfirmAction(string message, string title)
-        {
-            if (MessageBox.Show(message, title, MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                return true;
-            }
-            return false;
-        }     
     }
 }

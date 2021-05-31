@@ -143,6 +143,7 @@ namespace Sleave.view
             this.cboAction.Name = "cboAction";
             this.cboAction.Size = new System.Drawing.Size(175, 21);
             this.cboAction.TabIndex = 0;
+            this.cboAction.TabStop = false;
             this.cboAction.SelectedIndexChanged += new System.EventHandler(this.CboAction_SelectedIndexChanged);
             // 
             // btnValid
