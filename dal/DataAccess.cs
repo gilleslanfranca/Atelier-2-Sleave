@@ -13,10 +13,10 @@ namespace Sleave.dal
         private static string connectionString = "server=localhost;user id=responsable;password=pwd;database=mediatek86;SslMode=none";
 
         /// <summary>
-        /// Controle si l'utilisateur a le droit de se connecter
+        /// Contrôle si l'utilisateur a le droit de se connecter
         /// </summary>
-        /// <param name="login"></param>
-        /// <param name="pwd"></param>
+        /// <param name="login">Login de l'utilisateur</param>
+        /// <param name="pwd">Mot de passe de l'utilisateur</param>
         /// <returns>Vrai ou Faux</returns>
         public static Boolean ControlAccess(string login, string pwd)
         {
@@ -86,7 +86,7 @@ namespace Sleave.dal
         /// <summary>
         /// Récupère et retourne les absences de la base de données
         /// </summary>
-        /// <param name="pers"></param>
+        /// <param name="pers">Le personnel concerné</param>
         /// <returns>Liste des absences</returns>
         public static List<Absence> GetAbsences(Personnel pers)
         {
@@ -135,7 +135,7 @@ namespace Sleave.dal
         /// <summary>
         /// Ajoute un personnel à base de données
         /// </summary>
-        /// <param name="pers"></param>
+        /// <param name="pers">Le personnel à ajouter</param>
         public static void AddPersonnel(Personnel pers)
         {
             string req = "INSERT INTO personnel(nom, prenom, tel, mail, idservice) ";
@@ -153,7 +153,7 @@ namespace Sleave.dal
         /// <summary>
         /// Efface le personnel de la base de données
         /// </summary>
-        /// <param name="pers"></param>
+        /// <param name="pers">Le peronnel à effacer</param>
         public static void DeletePersonnel(Personnel pers)
         {
             string req = "DELETE FROM personnel ";
@@ -168,7 +168,7 @@ namespace Sleave.dal
         /// <summary>
         /// Modifie le personnel dans la base de données
         /// </summary>
-        /// <param name="persUp"></param>
+        /// <param name="persUp">Le personnel à modifier</param>
         public static void UpdatePersonnel(Personnel persUp)
         {
             string req = "UPDATE personnel SET idservice = @idservice, nom = @nom, prenom = @prenom, tel = @tel, mail = @mail ";
@@ -185,9 +185,9 @@ namespace Sleave.dal
         }
 
         /// <summary>
-        /// Ajoute une absence à une personnel de la base de données
+        /// Ajoute une absence à un personnel de la base de données
         /// </summary>
-        /// <param name="absenceAdd"></param>
+        /// <param name="absenceAdd">l'absence à ajouter</param>
         public static void AddAbsence(Absence absenceAdd)
         {
             string req = "INSERT INTO absence (dateDebut, dateFin,idpersonnel, idmotif) ";
@@ -204,7 +204,7 @@ namespace Sleave.dal
         /// <summary>
         /// Efface l'absence d'un personnel de la base de données
         /// </summary>
-        /// <param name="absenceDel"></param>
+        /// <param name="absenceDel">L'absence à effacer</param>
         public static void DelAbsence(Absence absenceDel)
         {
             string req = "DELETE FROM absence ";
@@ -218,7 +218,7 @@ namespace Sleave.dal
         /// <summary>
         /// Efface toutes les absences d'un personnel de la base de données
         /// </summary>
-        /// <param name="index"></param>
+        /// <param name="index">Index du personnel</param>
         public static void DeleteAllAbsences(int index)
         {
             string req = "DELETE FROM absence ";

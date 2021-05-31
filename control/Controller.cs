@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Sleave.control
 {
     /// <summary>
-    /// Classe de controle de l'application
+    /// Classe de contrôle de l'application
     /// </summary>
     public class Controller
     {
@@ -26,10 +26,10 @@ namespace Sleave.control
         }
 
         /// <summary>
-        /// Demande de connexion avec les données saisies. Ouvre l'interface "Gestion du Personnel" si correct
+        /// Demande de connexion avec les données saisies. Ouvre l'interface de gestion du personnel si correct
         /// </summary>
-        /// <param name="login"></param>
-        /// <param name="pwd"></param>
+        /// <param name="login">Login de l'utilisateur</param>
+        /// <param name="pwd">Mot de passe de l'utilisateur</param>
         /// <returns>Vrai ou Faux</returns>
         public Boolean ControlAccess(string login, string pwd)
         {
@@ -47,19 +47,19 @@ namespace Sleave.control
         }
 
         /// <summary>
-        /// Ouvre l'interface "Gestion du personnel"
+        /// Ouvre l'interface de gestion du personnel
         /// </summary>
-        /// <param name="frmPersonnel"></param>
+        /// <param name="frmPersonnel">L'interface gestion du personnel à ouvrir</param>
         public void OpenFrmPersonnel(FrmPersonnel frmPersonnel)
         {
             frmPersonnel.Show();
         }
 
         /// <summary>
-        /// Ferme l'interface de gestion du personnel et ouvre l'interface "Gestion des absences"
+        /// Ferme l'interface de gestion du personnel et ouvre l'interface "de gestion des absences
         /// </summary>
-        /// <param name="frmPersonnel"></param>
-        /// <param name="persAbsence"></param>
+        /// <param name="frmPersonnel">L'interface gestion à ferme</param>
+        /// <param name="persAbsence">Le personnel concerné</param>
         public void OpenFrmAbsence(FrmPersonnel frmPersonnel, Personnel persAbsence)
         {
             frmPersonnel.Hide();
@@ -88,7 +88,7 @@ namespace Sleave.control
         /// <summary>
         /// Demande et retourne la liste d'absences d'un personnel à DataAccess
         /// </summary>
-        /// <param name="pers"></param>
+        /// <param name="pers">Le personnel concerné</param>
         /// <returns>LIste des absences</returns>
         public List<Absence> GetAbsences(Personnel pers)
         {
@@ -107,7 +107,7 @@ namespace Sleave.control
         /// <summary>
         /// Demande l'ajout d'un personnel à DataAccess
         /// </summary>
-        /// <param name="pers"></param>
+        /// <param name="pers">Le personnel à ajouter</param>
         public void AddPersonnel(Personnel pers)
         {
             DataAccess.AddPersonnel(pers);
@@ -116,7 +116,7 @@ namespace Sleave.control
         /// <summary>
         /// Demande l'effacement d'un personnel à DataAccess
         /// </summary>
-        /// <param name="pers"></param>
+        /// <param name="pers">Le personnel à effacer</param>
         public void DeletePersonnel(Personnel pers)
         {
             DataAccess.DeletePersonnel(pers);
@@ -125,7 +125,7 @@ namespace Sleave.control
         /// <summary>
         /// Demande la modification d'un personnel à DataAccess
         /// </summary>
-        /// <param name="persUp"></param>
+        /// <param name="persUp">Le personnel à modifier</param>
         public void UpdatePersonnel(Personnel persUp)
         {
             DataAccess.UpdatePersonnel(persUp);
@@ -134,12 +134,16 @@ namespace Sleave.control
         /// <summary>
         /// Demande l'ajout d'une absence à DataAccess
         /// </summary>
-        /// <param name="absenceAdd"></param>
+        /// <param name="absenceAdd">L'absence à ajouter</param>
         public void AddAbsence(Absence absenceAdd)
         {
             DataAccess.AddAbsence(absenceAdd);
         }
 
+        /// <summary>
+        /// Demande l'effacement d'une absence à DataAccess
+        /// </summary>
+        /// <param name="absenceDel">L'absence à effacer</param>
         internal void DelAbsence(Absence absenceDel)
         {
             DataAccess.DelAbsence(absenceDel);
@@ -148,7 +152,7 @@ namespace Sleave.control
         /// <summary>
         /// Demande l'effacement de toutes les absences d'un personnel à DataAccess
         /// </summary>
-        /// <param name="index"></param>
+        /// <param name="index">ID du personnel</param>
         public void DeleteAllAbsences(int index)
         {
             DataAccess.DeleteAllAbsences(index);

@@ -26,10 +26,10 @@
         public string GetName { get => name; }
 
         /// <summary>
-        /// Constructeur du motif: valorise les propriétés
+        /// Constructeur du motif : Valorise les propriétés
         /// </summary>
-        /// <param name="idDept"></param>
-        /// <param name="name"></param>
+        /// <param name="idDept">ID du service</param>
+        /// <param name="name">Nom du service</param>
         public Dept(int idDept, string name)
         {
             this.idDept = idDept;
@@ -37,9 +37,9 @@
         }
 
         /// <summary>
-        /// Retourne la chaine nom du service
+        /// Retourne la chaîne nom du service
         /// </summary>
-        /// <returns>name</returns>
+        /// <returns>Nom du service</returns>
         public override string ToString()
         {
             return this.name;
