@@ -154,38 +154,43 @@ namespace Sleave.view
             switch (cboAction.SelectedIndex)
             {
                 case 0:
-                    Reason reason = (Reason)bdgReasons.List[bdgReasons.Position];
-                    Absence absenceAdd = new Absence(pers.GetIdPersonnel, pers.GetLastName, pers.GetFirstName, dtpStart.Value.Date, dtpEnd.Value.Date, reason.GetIdReason, reason.GetName);
-                    if (CheckReason() && CheckDatesOfAbsence(absenceAdd))
+                    if (CheckReason() && CheckDatesOfAbsence(null))
                     {
+                        Reason reasonAdd = (Reason)bdgReasons.List[bdgReasons.Position];
+                        Absence absenceAdd = new Absence(pers.GetIdPersonnel, pers.GetLastName, pers.GetFirstName, dtpStart.Value.Date, dtpEnd.Value.Date, reasonAdd.GetIdReason, reasonAdd.GetName);
                         controller.AddAbsence(absenceAdd);
                         ResetForm();
                         bdgAbsences.MoveLast();
                     }
                     break;
                 case 1:
-                    if (ConfirmChange("Supprimer l'absence du " + txtDateStart.Text + " au " + txtDateStart.Text + " ?", "Supprimer"))
-                    {
-                        Absence absence = (Absence)bdgAbsences.List[bdgAbsences.Position];
-                        controller.DelAbsence(absence);
-                        ResetForm();
-                        bdgAbsences.MoveFirst();
+                    if (MessageBox.Show("Supprimer l'absence du " + txtDateStart.Text + " au " + txtDateStart.Text +
+                        " ?", "Supprimer", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    { 
+                        Absence absenceDel = (Absence)bdgAbsences.List[bdgAbsences.Position];
+                        controller.DelAbsence(absenceDel);
                     }
+                    ResetForm();
+                    bdgAbsences.MoveFirst();
                     break;
                 case 2:
-                    Reason reasonUp = (Reason)bdgReasons.List[bdgReasons.Position];
-                    Absence absenceUp = new Absence(pers.GetIdPersonnel, pers.GetLastName, pers.GetFirstName, dtpStart.Value.Date, dtpEnd.Value.Date, reasonUp.GetIdReason, reasonUp.GetName);
-                    if (CheckReason() && CheckDatesOfAbsence(absenceUp)){
-                        if (ConfirmChange("Modifier l'absence du " + absenceUp.GetDateStart.ToString("dd.MM.yyyyy") + " au " + absenceUp.GetDateEnd.ToString("dd.MM.yyyyy") + " ?", "Modifier"))
+                    if (CheckReason())
+                    {
+                        Absence absenceDel = (Absence)bdgAbsences.List[bdgAbsences.Position];
+                        if (CheckDatesOfAbsence(absenceDel))
                         {
-                            Absence absenceDel = (Absence)bdgAbsences.List[bdgAbsences.Position];
-                            controller.DelAbsence(absenceDel);
-                            controller.AddAbsence(absenceUp);
+                            if (MessageBox.Show("Modifier l'absence du " + dtpStart.Value.Date.ToString("dd.MM.yyyy") +
+                                " au " + dtpEnd.Value.Date.ToString("dd.MM.yyyy") + " ?", "Modifier", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                            {
+                                controller.DelAbsence(absenceDel);
+                                Reason reasonAdd = (Reason)bdgReasons.List[bdgReasons.Position];
+                                Absence absenceAdd = new Absence(pers.GetIdPersonnel, pers.GetLastName, pers.GetFirstName, dtpStart.Value.Date, dtpEnd.Value.Date, reasonAdd.GetIdReason, reasonAdd.GetName);
+                                controller.AddAbsence(absenceAdd);
+                            }
                             ResetForm();
                         }
                     }
                     break;
-
             }
         }
 
@@ -363,14 +368,15 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Vérifie les dates de l'absence
+        /// Verfifie que dates d'absence ne coincident pas avec les dates d'une absence déjà présente
         /// </summary>
+        /// <param name="absence">Absence à verifier</param>
         /// <returns>Vrai ou Faux</returns>
         private bool CheckDatesOfAbsence(Absence absence)
         {
             foreach (Absence abs in bdgAbsences)
             {
-                if (abs == absence)
+                if (cboAction.SelectedIndex == 0 || (cboAction.SelectedIndex == 2 && !abs.Equals(absence)))
                 {
                     //La date de début ou de fin trouve déja dans une absence
                     if (dtpStart.Value.Date >= abs.GetDateStart.Date && dtpStart.Value.Date <= abs.GetDateEnd.Date)
@@ -395,21 +401,6 @@ namespace Sleave.view
         }
 
         /// <summary>
-        /// Demande confirmation pour poursuivre l'action 
-        /// </summary>
-        /// <param name="message">Message à afficher dans</param>
-        /// <param name="title">Titre du message</param>
-        /// <returns>Vrai ou Faux</returns>
-        private bool ConfirmChange(string message, string title)
-        {
-            if (MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
         /// Réinitialise le texte de liste d'action et informe l'utlisateur si aucun élément de la grille de données n'est selectionné
         /// </summary>
         /// <returns>Vrai ou Faux</returns>
@@ -417,7 +408,7 @@ namespace Sleave.view
         {
             if (dgvAbsences.RowCount < 1)
             {
-                MessageBox.Show("Aucune absence n'est selectionnée.", "Absence", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Aucune absence selectionnée.", "Absence", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cboAction.SelectedIndex = -1;
 
                 return false;
