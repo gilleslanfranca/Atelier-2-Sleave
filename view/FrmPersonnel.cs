@@ -120,7 +120,6 @@ namespace Sleave.view
                         Personnel persAdd = new Personnel(0, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, deptAdd.GetIdDept, deptAdd.GetName);
                         controller.AddPersonnel(persAdd);
                         ResetForm();
-                        bdgPersonnel.MoveLast();
                     }
                     break;
                 // Supprimer
@@ -131,9 +130,8 @@ namespace Sleave.view
                     { 
                         controller.DeleteAllAbsences(personnelDel.GetIdPersonnel);
                         controller.DeletePersonnel(personnelDel);
-                        ResetForm();
-                        bdgPersonnel.MoveFirst();
                     }
+                    ResetForm();
                     break;
                 // Modifier
                 case 2:
@@ -247,6 +245,7 @@ namespace Sleave.view
             ToggleSelection();
             ToggleButtons();
             BindDGVPersonnel();
+            bdgPersonnel.MoveFirst();
             ResizeDGVPersonnel();
             cboAction.SelectedIndex = -1;
             txtLastName.Enabled = false;

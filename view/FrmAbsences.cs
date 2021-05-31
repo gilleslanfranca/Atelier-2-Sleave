@@ -160,7 +160,6 @@ namespace Sleave.view
                         Absence absenceAdd = new Absence(pers.GetIdPersonnel, pers.GetLastName, pers.GetFirstName, dtpStart.Value.Date, dtpEnd.Value.Date, reasonAdd.GetIdReason, reasonAdd.GetName);
                         controller.AddAbsence(absenceAdd);
                         ResetForm();
-                        bdgAbsences.MoveLast();
                     }
                     break;
                 case 1:
@@ -171,7 +170,6 @@ namespace Sleave.view
                         controller.DelAbsence(absenceDel);
                     }
                     ResetForm();
-                    bdgAbsences.MoveFirst();
                     break;
                 case 2:
                     if (CheckReason())
@@ -186,8 +184,8 @@ namespace Sleave.view
                                 Reason reasonAdd = (Reason)bdgReasons.List[bdgReasons.Position];
                                 Absence absenceAdd = new Absence(pers.GetIdPersonnel, pers.GetLastName, pers.GetFirstName, dtpStart.Value.Date, dtpEnd.Value.Date, reasonAdd.GetIdReason, reasonAdd.GetName);
                                 controller.AddAbsence(absenceAdd);
+                                ResetForm();
                             }
-                            ResetForm();
                         }
                     }
                     break;
@@ -222,6 +220,7 @@ namespace Sleave.view
             ToggleSelection();
             ToggleButtons();
             BindDGVAbsences();
+            bdgAbsences.MoveFirst();
             ShowDtpProtection();
             txtDateStart.Text = "";
             txtDateEnd.Text = "";
