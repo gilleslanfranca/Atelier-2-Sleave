@@ -3,9 +3,6 @@ using Sleave.model;
 using Sleave.view;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sleave.control
 {
@@ -137,10 +134,10 @@ namespace Sleave.control
         /// <summary>
         /// Demande l'ajout d'une absence à DataAccess
         /// </summary>
-        /// <param name="absence"></param>
-        public void AddAbsence(Absence absence)
+        /// <param name="absenceAdd"></param>
+        public void AddAbsence(Absence absenceAdd)
         {
-            DataAccess.AddAbsence(absence);
+            DataAccess.AddAbsence(absenceAdd);
         }
 
         internal void DelAbsence(Absence absenceDel)
