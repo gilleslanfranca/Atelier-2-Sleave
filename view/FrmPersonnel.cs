@@ -24,7 +24,7 @@ namespace Sleave.view
         /// <summary>
         /// Constante : Chaîne nom de la liste d'actions déroulante
         /// </summary>
-        private const string actionText = "Gérer les absences";
+        private const string actionText = "Gérer les personnels";
 
         /// <summary>
         /// Instance de contrôle
@@ -126,7 +126,7 @@ namespace Sleave.view
                 case 1:
                     Personnel personnelDel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
                     if (MessageBox.Show("Supprimer le personnel n° " + personnelDel.GetIdPersonnel + " : " + personnelDel.GetFirstName + " " + personnelDel.GetLastName 
-                        + " ?", "Supprimer", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        + " ?", "Supprimer", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     { 
                         controller.DeleteAllAbsences(personnelDel.GetIdPersonnel);
                         controller.DeletePersonnel(personnelDel);
@@ -139,7 +139,7 @@ namespace Sleave.view
                     {
                         Personnel personnelMod = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
                         if (MessageBox.Show("Modifier le personnel n° " + personnelMod.GetIdPersonnel + " : " + personnelMod.GetFirstName + " " + personnelMod.GetLastName
-                            + " ?", "Modifier", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            + " ?", "Modifier", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                         { 
                             Dept deptUp = (Dept)bdgDepts.List[bdgDepts.Position];
                             Personnel persUp = new Personnel(personnelMod.GetIdPersonnel, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, deptUp.GetIdDept, deptUp.GetName);
