@@ -2,9 +2,6 @@
 using Sleave.model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sleave.dal
 {
@@ -190,16 +187,16 @@ namespace Sleave.dal
         /// <summary>
         /// Ajoute une absence à une personnel de la base de données
         /// </summary>
-        /// <param name="absence"></param>
-        public static void AddAbsence(Absence absence)
+        /// <param name="absenceAdd"></param>
+        public static void AddAbsence(Absence absenceAdd)
         {
-            string req = "INSERT INTO absence(dateDebut, dateFin,idpersonnel, idmotif) ";
+            string req = "INSERT INTO absence (dateDebut, dateFin,idpersonnel, idmotif) ";
             req += "VALUES (@dateStart, @datEnd, @idPersonnel, @idReason);";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
-            parameters.Add("@dateStart", absence.GetDateStart.Date.ToString("yyyy-MM-dd"));
-            parameters.Add("@datEnd", absence.GetDateEnd.Date.ToString("yyyy-MM-dd"));
-            parameters.Add("@idPersonnel", absence.GetIdpersonnel);
-            parameters.Add("@idReason", absence.GetIdReason);
+            parameters.Add("@dateStart", absenceAdd.GetDateStart.Date.ToString("yyyy-MM-dd"));
+            parameters.Add("@datEnd", absenceAdd.GetDateEnd.Date.ToString("yyyy-MM-dd"));
+            parameters.Add("@idPersonnel", absenceAdd.GetIdpersonnel);
+            parameters.Add("@idReason", absenceAdd.GetIdReason);
             ConnectionDataBase conn = ConnectionDataBase.GetInstance(connectionString);
             conn.ReqNoQuery(req, parameters);
         }

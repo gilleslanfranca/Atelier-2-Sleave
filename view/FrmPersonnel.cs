@@ -2,12 +2,6 @@
 using Sleave.model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Sleave.view
@@ -26,6 +20,11 @@ namespace Sleave.view
         /// Constante : Nombre maximal de ligne affichée sans barre déroulante
         /// </summary>
         private const int maxRows = 9;
+
+        /// <summary>
+        /// Constante : Chaine nom de la liste d'actions déroulante
+        /// </summary>
+        private const string actionText = "Gérer les absences";
 
         /// <summary>
         /// Instance de controle
@@ -65,36 +64,40 @@ namespace Sleave.view
         /// <param name="e"></param>
         private void CboAction_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Rien 
-            if(cboAction.SelectedIndex == -1)
-            {
-                cboAction.Text = "Gérer le personnel";
-            }
-            else
-            {
-                if (CheckDGVIndex())
-                {
+            // Le code peut être simplifié mais il est beaucoup plus lisible ainsi
+            switch (cboAction.SelectedIndex)
+            {   
+                // Ajouter
+                case 0:
                     ToggleSelection();
                     ToggleButtons();
-                    // Ajouter
-                    if (cboAction.SelectedIndex == 0)
+                    TogglePersFields();
+                    cboDept.Text = "Choisissez un service";
+                    break;
+                // Supprimer
+                case 1:
+                // Afficher
+                case 3:
+                    if (CheckDGVIndex())
                     {
-                        TogglePersFields();
-                        cboDept.Text = "Choissisez un service";
-                    }
-                    // Supprimer || Afficher
-                    if (cboAction.SelectedIndex == 1 || cboAction.SelectedIndex == 3)
-                    {
+                        ToggleSelection();
+                        ToggleButtons();
                         GetPersFields();
                     }
-                    // Modifier
-                    if (cboAction.SelectedIndex == 2)
+                    break;
+                // Modifier
+                case 2:
+                    if (CheckDGVIndex())
                     {
+                        ToggleSelection();
+                        ToggleButtons();
                         TogglePersFields();
                         GetPersFields();
                     }
-                }
-                
+                    break;
+                default:
+                    BeginInvoke(new Action(() => cboAction.Text = actionText));
+                    break;
             }
         }
 
@@ -105,53 +108,56 @@ namespace Sleave.view
         /// <param name="e"></param>
         private void BtnValid_Click(object sender, EventArgs e)
         {
-            // Récupérer personnel
-            Personnel personnel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
-            // Afficher
-            if (cboAction.SelectedIndex == 3)
+            // Le code peut être simplifié mais il est beaucoup plus lisible ainsi
+            switch (cboAction.SelectedIndex)
             {
-                controller.OpenFrmAbsence(this, personnel);
-                ResetForm();
-            }
-            // Supprimer 
-            else if (cboAction.SelectedIndex == 1)
-            {
-                if (ConfirmAction("Supprimer le personnel n° " + personnel.GetIdPersonnel + " : " + personnel.GetFirstName + " " + personnel.GetLastName + " ?", "Supprimer"))
-                {
-                    controller.DeleteAllAbsences(personnel.GetIdPersonnel);
-                    controller.DeletePersonnel(personnel);
-                    ResetForm();
-                    bdgPersonnel.MoveFirst();
-                }
-            }
-            // Verifier champs
-            else if (CheckPersFields())
-            {
-                // Récupérer service
-                Dept dept = (Dept)bdgDepts.List[bdgDepts.Position];
-                // Modifier
-                if (cboAction.SelectedIndex == 2)
-                {
-                    if (ConfirmAction("Modifier le personnel n° " + personnel.GetIdPersonnel + " : " + personnel.GetFirstName + " " + personnel.GetLastName + " ?", "Modifier"))
-                    {
-                        Personnel persUp = new Personnel(personnel.GetIdPersonnel, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, dept.GetIdDept, dept.GetName);
-                        controller.UpdatePersonnel(persUp);
-                        ResetForm();
-                    }
-                }
                 // Ajouter
-                if (cboAction.SelectedIndex == 0)
-                {
-                    Personnel persAdd = new Personnel(0, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, dept.GetIdDept, dept.GetName);
-                    controller.AddPersonnel(persAdd);
+                case 0:
+                    if (CheckPersFields())
+                    {
+                        Dept deptAdd = (Dept)bdgDepts.List[bdgDepts.Position];
+                        Personnel persAdd = new Personnel(0, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, deptAdd.GetIdDept, deptAdd.GetName);
+                        controller.AddPersonnel(persAdd);
+                        ResetForm();
+                        bdgPersonnel.MoveLast();
+                    }
+                    break;
+                // Supprimer
+                case 1:
+                    Personnel personnelDel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
+                    if (ConfirmAction("Supprimer le personnel n° " + personnelDel.GetIdPersonnel + " : " + personnelDel.GetFirstName + " " + personnelDel.GetLastName + " ?", "Supprimer"))
+                    {
+                        controller.DeleteAllAbsences(personnelDel.GetIdPersonnel);
+                        controller.DeletePersonnel(personnelDel);
+                        ResetForm();
+                        bdgPersonnel.MoveFirst();
+                    }
+                    break;
+                // Modifier
+                case 2:
+                    if (CheckPersFields())
+                    {
+                        Personnel personnelMod = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
+                        if (ConfirmAction("Modifier le personnel n° " + personnelMod.GetIdPersonnel + " : " + personnelMod.GetFirstName + " " + personnelMod.GetLastName + " ?", "Modifier"))
+                        {
+                            Dept deptUp = (Dept)bdgDepts.List[bdgDepts.Position];
+                            Personnel persUp = new Personnel(personnelMod.GetIdPersonnel, txtLastName.Text, txtFirstName.Text, txtPhone.Text, txtMail.Text, deptUp.GetIdDept, deptUp.GetName);
+                            controller.UpdatePersonnel(persUp);
+                            ResetForm();
+                        }
+                    }
+                    break;
+                // Afficher
+                case 3:
+                    Personnel personnel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
+                    controller.OpenFrmAbsence(this, personnel);
                     ResetForm();
-                    bdgPersonnel.MoveLast();
-                }
-            }            
+                    break;
+            }
         }
 
         /// <summary>
-        /// Annule l'action et réinitialise l'interface
+        /// Annule l'action 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
