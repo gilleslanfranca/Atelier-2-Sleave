@@ -391,7 +391,7 @@ namespace Sleave.view
                     //La date de début se trouve avant et la date de fin après une absence
                     if (dtpStart.Value.Date < abs.GetDateStart.Date && dtpEnd.Value.Date > abs.GetDateEnd.Date)
                     {
-                        MessageBox.Show("Une absence se trouve déjà dans cette periode d'absence", "Dates", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Une absence se trouve déjà dans cette periode.", "Dates", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }
                 }
