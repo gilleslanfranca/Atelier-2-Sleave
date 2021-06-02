@@ -208,9 +208,10 @@ namespace Sleave.dal
         public static void DelAbsence(Absence absenceDel)
         {
             string req = "DELETE FROM absence ";
-            req += "WHERE DATE(dateDebut) = @dateStart;";
+            req += "WHERE DATE(dateDebut) = @dateStart AND idpersonnel = @idpersonnel;";
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("@dateStart", absenceDel.GetDateStart.Date.ToString("yyyy-MM-dd"));
+            parameters.Add("@idpersonnel", absenceDel.GetIdpersonnel);
             ConnectionDataBase conn = ConnectionDataBase.GetInstance(connectionString);
             conn.ReqNoQuery(req, parameters);
         }
